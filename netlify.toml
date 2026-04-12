@@ -1,7 +1,7 @@
 [build]
   base = "chain-crm"
-  publish = "chain-crm/public"
-  functions = "chain-crm/netlify/functions"
+  publish = "public"
+  functions = "netlify/functions"
 
 [build.environment]
   SAHIBA_API_TOKEN = "Sahiba_CZSfEghwaD4s"
