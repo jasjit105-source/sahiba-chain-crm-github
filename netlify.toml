@@ -1,6 +1,7 @@
 [build]
-  publish = "chain-crm/public"
-  functions = "chain-crm/netlify/functions"
+  base = "chain-crm"
+  publish = "public"
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/query"
