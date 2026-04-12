@@ -1,0 +1,12 @@
+[build]
+  base = "chain-crm"
+  publish = "chain-crm/public"
+  functions = "chain-crm/netlify/functions"
+
+[build.environment]
+  SAHIBA_API_TOKEN = "Sahiba_CZSfEghwaD4s"
+
+[[redirects]]
+  from = "/api/query"
+  to = "/.netlify/functions/query"
+  status = 200
