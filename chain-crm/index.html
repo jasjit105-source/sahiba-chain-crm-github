@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SAHIBA Chain Store CRM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#06090F;--bg2:#0C1220;--bg3:#121B2E;--bg4:#182440;--bg5:#1E2D4D;
+--bdr:#1C2A45;--bdr2:#253555;
+--t1:#F0F2F8;--t2:#A0AABE;--t3:#6B7A94;--t4:#4A5A74;
+--ac:#4F8EF7;--ac2:#6BA1FF;--acd:rgba(79,142,247,.1);
+--gn:#22C55E;--gnd:rgba(34,197,94,.1);
+--yw:#EAB308;--ywd:rgba(234,179,8,.1);
+--rd:#EF4444;--rdd:rgba(239,68,68,.1);
+--pk:#EC4899;--pkd:rgba(236,72,153,.1);
+--cy:#06B6D4;--cyd:rgba(6,182,212,.1);
+--or:#F97316;--ord:rgba(249,115,22,.1);
+--r1:8px;--r2:12px;--r3:16px;--r4:20px;
+--sh:0 4px 16px rgba(0,0,0,.4);
+}
+body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
+input,select,textarea,button{font-family:inherit}
+a{color:var(--ac);text-decoration:none}
+
+.lw{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse at 30% 20%,#0F1A30 0%,var(--bg) 70%)}
+.lb{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r4);padding:44px 36px;width:360px;max-width:92vw;text-align:center;box-shadow:var(--sh)}
+.ll{font-family:"Instrument Serif",serif;font-size:36px;color:var(--ac);letter-spacing:1px;margin-bottom:2px}
+.ls{font-size:11px;color:var(--t4);text-transform:uppercase;letter-spacing:3px;margin-bottom:32px}
+.pd{display:flex;justify-content:center;gap:14px;margin-bottom:28px}
+.pdd{width:13px;height:13px;border-radius:50%;border:2px solid var(--bdr);transition:.2s}
+.pdd.f{background:var(--ac);border-color:var(--ac);box-shadow:0 0 10px rgba(79,142,247,.4)}
+.pdd.e{border-color:var(--rd);background:var(--rd)}
+.pp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:240px;margin:0 auto}
+.ppb{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);color:var(--t1);font-size:20px;font-weight:600;padding:14px;cursor:pointer;transition:.15s;font-family:inherit}
+.ppb:hover{background:var(--bg4);border-color:var(--ac)}
+.ppb:active{transform:scale(.95)}
+.ppb.c{font-size:12px;font-weight:500;color:var(--t3)}
+.lu{font-size:13px;color:var(--t2);margin-bottom:20px}
+.lu select{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r1);color:var(--t1);padding:6px 10px;font-size:13px;margin-left:6px;cursor:pointer;font-family:inherit}
+.le{color:var(--rd);font-size:12px;margin-top:14px;min-height:18px}
+
+.al{display:flex;min-height:100vh}
+.sb{width:220px;background:var(--bg2);border-right:1px solid var(--bdr);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s}
+.sb-h{padding:20px 16px;border-bottom:1px solid var(--bdr)}
+.sb-h h1{font-family:"Instrument Serif",serif;font-size:24px;color:var(--ac);font-weight:400}
+.sb-h p{font-size:10px;color:var(--t4);text-transform:uppercase;letter-spacing:2.5px;margin-top:1px}
+.sb-n{flex:1;padding:12px 8px;overflow-y:auto}
+.ns{margin-bottom:16px}
+.nl{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--t4);padding:0 8px;margin-bottom:6px;font-weight:600}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r1);cursor:pointer;color:var(--t3);font-size:13px;font-weight:500;transition:.15s;margin-bottom:1px;position:relative}
+.ni:hover{background:var(--bg3);color:var(--t1)}
+.ni.a{background:var(--acd);color:var(--ac)}
+.ni .ic{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.ni .nb{position:absolute;right:8px;background:var(--rd);color:#fff;font-size:9px;padding:1px 5px;border-radius:8px;font-weight:700}
+.sb-f{padding:12px;border-top:1px solid var(--bdr)}
+.up{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--r1);cursor:pointer}
+.up:hover{background:var(--bg3)}
+.ua{width:28px;height:28px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.ui .un{font-size:12px;font-weight:600;color:var(--t1)}
+.ui .ur{font-size:10px;color:var(--t4);text-transform:uppercase;letter-spacing:1px}
+
+.mc{margin-left:220px;flex:1;min-height:100vh}
+.tb{height:52px;background:var(--bg2);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50}
+.tb-t{font-size:16px;font-weight:600}
+.tb-a{display:flex;align-items:center;gap:10px}
+.tb-s{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r1);padding:7px 12px;color:var(--t1);font-size:12px;width:200px;outline:none;font-family:inherit}
+.tb-s:focus{border-color:var(--ac)}
+.hb{display:none;background:none;border:none;color:var(--t1);font-size:22px;cursor:pointer;padding:4px}
+.lang-sw{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r1);padding:5px 8px;color:var(--t2);font-size:11px;cursor:pointer;font-family:inherit;font-weight:600}
+
+.pc{padding:24px}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.mk{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);padding:18px;transition:.2s;position:relative;overflow:hidden}
+.mk:hover{border-color:var(--ac);transform:translateY(-1px)}
+.mk-l{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.mk-v{font-size:26px;font-weight:700;font-family:"Instrument Serif",serif}
+.mk-c{font-size:11px;margin-top:4px}
+.tw{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden}
+.dt{width:100%;border-collapse:collapse}
+.dt th{background:var(--bg2);padding:10px 14px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t4);font-weight:600;border-bottom:1px solid var(--bdr);white-space:nowrap}
+.dt td{padding:10px 14px;font-size:12px;border-bottom:1px solid var(--bdr);color:var(--t2)}
+.dt tr:hover td{background:var(--bg4);color:var(--t1)}
+.dt tr:last-child td{border-bottom:none}
+.bd{display:inline-flex;align-items:center;padding:3px 9px;border-radius:16px;font-size:10px;font-weight:600;letter-spacing:.3px}
+.bd-gn{background:var(--gnd);color:var(--gn)}.bd-yw{background:var(--ywd);color:var(--yw)}.bd-rd{background:var(--rdd);color:var(--rd)}
+.bd-bl{background:var(--acd);color:var(--ac)}.bd-pk{background:var(--pkd);color:var(--pk)}.bd-cy{background:var(--cyd);color:var(--cy)}
+.bd-or{background:var(--ord);color:var(--or)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:var(--r1);font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:.15s;font-family:inherit}
+.btn-p{background:var(--ac);color:#fff}.btn-p:hover{background:var(--ac2)}
+.btn-g{background:transparent;color:var(--t2);border-color:var(--bdr)}.btn-g:hover{background:var(--bg3);color:var(--t1);border-color:var(--t3)}
+.btn-s{padding:5px 10px;font-size:11px}
+.btn-d{background:var(--rd);color:#fff}
+.btn-gn{background:var(--gn);color:#fff}
+
+.pl{display:flex;gap:10px;overflow-x:auto;padding-bottom:12px}
+.pl-c{min-width:240px;max-width:260px;flex-shrink:0}
+.pl-h{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2) var(--r2) 0 0}
+.pl-h h3{font-size:12px;font-weight:600}
+.pl-cnt{background:var(--bg2);padding:2px 7px;border-radius:10px;font-size:10px;color:var(--t3)}
+.pl-b{background:var(--bg2);border:1px solid var(--bdr);border-top:none;border-radius:0 0 var(--r2) var(--r2);padding:6px;min-height:80px;display:flex;flex-direction:column;gap:6px}
+.pl-k{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r1);padding:10px;cursor:pointer;transition:.15s}
+.pl-k:hover{border-color:var(--ac);transform:translateY(-1px)}
+.pl-k .kc{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--t4);margin-bottom:3px}
+.pl-k .kt{font-size:12px;font-weight:600;color:var(--t1);margin-bottom:5px}
+.pl-k .km{display:flex;justify-content:space-between;align-items:center}
+.pl-k .ka{font-size:12px;font-weight:700;color:var(--gn)}
+.pl-k .kd{font-size:10px;color:var(--t4)}
+.pl-k .kp{font-size:10px;color:var(--ac);margin-top:4px}
+
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px}
+.pkd{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);overflow:hidden;cursor:pointer;transition:.2s}
+.pkd:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:var(--sh)}
+.pi{height:180px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;overflow:hidden}
+.pi img{width:100%;height:100%;object-fit:cover}
+.pi .pi-ph{color:var(--t4);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.pi .sb-k{position:absolute;top:6px;right:6px}
+.pif{padding:12px}
+.pif .sn{font-size:10px;color:var(--ac);text-transform:uppercase;letter-spacing:1px}
+.pif .pn{font-size:13px;font-weight:600;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pif .pp2{font-size:14px;font-weight:700;color:var(--gn)}
+.pif .pcat{font-size:10px;color:var(--t4);margin-top:3px}
+
+.acs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.akd{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);padding:18px;cursor:pointer;transition:.2s}
+.akd:hover{border-color:var(--ac);box-shadow:var(--sh)}
+.akd .ah{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}
+.akd .acn{font-family:"Instrument Serif",serif;font-size:20px;font-weight:400}
+.akd .aby{font-size:12px;color:var(--t2);margin-top:2px}
+.akd .ast{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--bdr)}
+.akd .asl{font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px}
+.akd .asv{font-size:14px;font-weight:700;margin-top:1px}
+
+.do{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:flex;justify-content:flex-end;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.dp{width:520px;max-width:95vw;background:var(--bg2);border-left:1px solid var(--bdr);height:100vh;overflow-y:auto;padding:24px;animation:slideR .25s ease}
+@keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.dp-x{background:none;border:none;color:var(--t3);font-size:20px;cursor:pointer;float:right;padding:4px}
+.dp-x:hover{color:var(--t1)}
+.dp h2{font-family:"Instrument Serif",serif;font-size:22px;font-weight:400;margin-bottom:3px}
+.dp .ds{font-size:12px;color:var(--t4);margin-bottom:18px}
+.dps{margin-bottom:18px}
+.dps h3{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t4);margin-bottom:8px;font-weight:600}
+.df{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:12px}
+.df .dl{color:var(--t3)}.df .dv{color:var(--t1);font-weight:500}
+.tl{position:relative;padding-left:18px}
+.tl::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:1.5px;background:var(--bdr)}
+.ti{position:relative;margin-bottom:14px;padding-left:14px}
+.ti::before{content:"";position:absolute;left:-16px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--ac);border:2px solid var(--bg2)}
+.ti .td2{font-size:10px;color:var(--t4)}.ti .tt{font-size:12px;color:var(--t2);margin-top:1px}
+.fb{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.fs{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r1);padding:7px 10px;color:var(--t1);font-size:12px;cursor:pointer;font-family:inherit}
+.fs:focus{border-color:var(--ac);outline:none}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bdr);margin-bottom:18px}
+.tab{padding:8px 16px;font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;transition:.15s}
+.tab:hover{color:var(--t1)}.tab.a{color:var(--ac);border-bottom-color:var(--ac)}
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:flex;align-items:center;justify-content:center;animation:fadeIn .15s}
+.modal{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r3);width:520px;max-width:92vw;max-height:85vh;overflow-y:auto;padding:28px;box-shadow:var(--sh)}
+.modal h2{font-family:"Instrument Serif",serif;font-size:22px;font-weight:400;margin-bottom:16px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:4px;font-weight:600}
+.fi{width:100%;background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r1);padding:8px 12px;color:var(--t1);font-size:13px;font-family:inherit}
+.fi:focus{border-color:var(--ac);outline:none}
+textarea.fi{min-height:70px;resize:vertical}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.set-card{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);padding:18px;margin-bottom:14px}
+.set-card h3{font-size:14px;font-weight:600;margin-bottom:10px}
+.toggle{width:36px;height:20px;background:var(--bdr);border-radius:10px;position:relative;cursor:pointer;transition:.2s}
+.toggle.on{background:var(--ac)}
+.toggle::after{content:"";position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:2px;left:2px;transition:.2s}
+.toggle.on::after{left:18px}
+.set-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.set-row:last-child{border-bottom:none}
+.set-row .sr-l{font-size:13px;color:var(--t2)}
+.empty{text-align:center;padding:40px 20px;color:var(--t4)}
+.empty .em-i{font-size:40px;margin-bottom:12px}
+.empty .em-t{font-size:14px;color:var(--t2);margin-bottom:4px}
+.empty .em-s{font-size:12px}
+.log-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr);font-size:12px}
+.log-item:last-child{border-bottom:none}
+.log-time{color:var(--t4);white-space:nowrap;min-width:110px}
+.log-user{color:var(--ac);font-weight:600;min-width:60px}
+.log-action{color:var(--t2)}
+.chart-ph{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r2);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:160px;padding:0 16px}
+.bar{width:40px;border-radius:4px 4px 0 0;transition:height .5s;position:relative}
+.bar-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--t4);white-space:nowrap}
+.bar-val{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--t2);font-weight:600}
+
+/* Loading */
+.ld-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px}
+.ld-spin{width:32px;height:32px;border:3px solid var(--bdr);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-text{margin-top:12px;font-size:13px;color:var(--t3)}
+.api-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3)}
+.api-dot{width:6px;height:6px;border-radius:50%}
+.api-dot.on{background:var(--gn)}.api-dot.off{background:var(--rd)}.api-dot.loading{background:var(--yw);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Product detail image */
+.dp-img{width:100%;height:220px;background:var(--bg3);border-radius:var(--r2);overflow:hidden;margin-bottom:16px;display:flex;align-items:center;justify-content:center}
+.dp-img img{width:100%;height:100%;object-fit:contain}
+.dp-img .pi-ph{color:var(--t4);font-size:13px}
+
+@media(max-width:768px){
+.sb{transform:translateX(-100%)}.sb.open{transform:translateX(0)}.mc{margin-left:0}.hb{display:block}
+.mg{grid-template-columns:repeat(2,1fr)}.acs{grid-template-columns:1fr}.pg{grid-template-columns:repeat(2,1fr)}
+.tb-s{width:120px}.pl{flex-direction:column}.pl-c{min-width:100%;max-width:100%}
+.fg-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){.mg{grid-template-columns:1fr}.pg{grid-template-columns:1fr}}
+
+/* Quote/Order builder */
+.qb-wrap{display:grid;grid-template-columns:340px 1fr;gap:20px;min-height:500px}
+.qb-sidebar{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);padding:16px;overflow-y:auto;max-height:75vh}
+.qb-main{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);padding:20px;overflow-y:auto;max-height:75vh}
+.qb-search{position:relative}
+.qb-results{max-height:300px;overflow-y:auto;margin-top:8px}
+.qb-prod{display:flex;gap:10px;padding:8px;border:1px solid var(--bdr);border-radius:var(--r1);margin-bottom:6px;cursor:pointer;transition:.15s;align-items:center}
+.qb-prod:hover{border-color:var(--ac);background:var(--bg4)}
+.qb-prod img{width:44px;height:44px;border-radius:6px;object-fit:cover}
+.qb-prod .qp-ph{width:44px;height:44px;border-radius:6px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--t4)}
+.qb-prod .qp-info{flex:1;min-width:0}
+.qb-prod .qp-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qb-prod .qp-meta{font-size:10px;color:var(--t3);margin-top:2px}
+.qb-prod .qp-stock{font-size:10px;margin-top:2px}
+.qb-prod .qp-add{background:var(--ac);color:#fff;border:none;border-radius:4px;padding:3px 8px;font-size:10px;cursor:pointer;white-space:nowrap}
+
+/* Line items table */
+.li-table{width:100%;border-collapse:collapse;margin-top:12px}
+.li-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t4);padding:6px 8px;border-bottom:1px solid var(--bdr);font-weight:600}
+.li-table td{padding:8px;border-bottom:1px solid var(--bdr);font-size:12px;vertical-align:middle}
+.li-table tr:last-child td{border-bottom:none}
+.li-table .li-img{width:36px;height:36px;border-radius:4px;object-fit:cover}
+.li-table input[type=number]{width:70px;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r1);padding:4px 6px;color:var(--t1);font-size:12px;text-align:right;font-family:inherit}
+.li-table input[type=number]:focus{border-color:var(--ac);outline:none}
+.li-rm{background:none;border:none;color:var(--rd);cursor:pointer;font-size:16px;padding:2px 6px}
+.li-rm:hover{color:#fff;background:var(--rd);border-radius:4px}
+
+/* Totals */
+.qt-totals{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r1);padding:14px;margin-top:14px}
+.qt-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px}
+.qt-row.total{font-size:15px;font-weight:700;border-top:1px solid var(--bdr);padding-top:8px;margin-top:4px}
+
+/* Chain rules banner */
+.chain-rules{background:var(--acd);border:1px solid rgba(79,142,247,.2);border-radius:var(--r1);padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--ac2)}
+.chain-rules strong{color:var(--ac)}
+
+/* Status timeline */
+.st-timeline{padding:12px 0}
+.st-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:12px}
+.st-item:last-child{border-bottom:none}
+.st-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.st-time{color:var(--t4);min-width:90px;font-size:11px}
+.st-text{color:var(--t2)}
+
+/* Stock location popup */
+.stock-pop{position:absolute;background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r1);padding:10px;z-index:10;box-shadow:var(--sh);font-size:11px;min-width:160px}
+.stock-pop .sp-row{display:flex;justify-content:space-between;padding:2px 0}
+.stock-pop .sp-loc{color:var(--t3)}
+.stock-pop .sp-qty{color:var(--t1);font-weight:600}
+
+/* PDF preview */
+.pdf-preview{background:#fff;color:#111;border-radius:var(--r2);padding:32px;margin-top:16px;font-family:"DM Sans",sans-serif}
+.pdf-preview h1{font-size:22px;font-weight:700;margin-bottom:4px;color:#111}
+.pdf-preview h2{font-size:14px;font-weight:600;margin:16px 0 8px;color:#333;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid #4F8EF7;padding-bottom:4px}
+.pdf-preview table{width:100%;border-collapse:collapse;margin:8px 0}
+.pdf-preview th{background:#f0f2f8;padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#666;border-bottom:2px solid #ddd}
+.pdf-preview td{padding:8px 10px;font-size:12px;border-bottom:1px solid #eee;color:#333}
+.pdf-preview .pdf-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:20px;border-bottom:3px solid #4F8EF7;padding-bottom:16px}
+.pdf-preview .pdf-logo{font-family:"Instrument Serif",serif;font-size:28px;color:#4F8EF7}
+.pdf-preview .pdf-info{text-align:right;font-size:11px;color:#666}
+.pdf-preview .pdf-total{text-align:right;font-size:18px;font-weight:700;color:#111;margin-top:12px}
+.pdf-preview .pdf-footer{margin-top:24px;padding-top:12px;border-top:1px solid #ddd;font-size:10px;color:#999;text-align:center}
+.pdf-preview .pdf-chain-box{background:#f8f9fc;border:1px solid #e0e4ed;border-radius:6px;padding:10px;margin:8px 0;font-size:11px;color:#555}
+
+/* Shipment tracking */
+.ship-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r1);padding:12px;margin-bottom:10px}
+.ship-card h4{font-size:12px;font-weight:600;margin-bottom:8px}
+.ship-items{font-size:11px;color:var(--t2)}
+
+@media(max-width:768px){.qb-wrap{grid-template-columns:1fr;max-height:none}.qb-sidebar{max-height:300px}.qb-main{max-height:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- Google Drive Image Loader - runs before React -->
+<script>
+var GDRIVE_IMG_MAP = {};
+var GDRIVE_LOADED = false;
+var GDRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxetLjQ0z9uWLoOxevDn7cvOraKEY81i7L-TfrS9A7hy140SdlAY1ikWvKrI6U49wMk/exec";
+
+function loadDriveImages() {
+  // Check cache first
+  try {
+    var cached = sessionStorage.getItem("gdrive_cache");
+    var cacheTime = sessionStorage.getItem("gdrive_cache_time");
+    if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 86400000) {
+      var files = JSON.parse(cached);
+      files.forEach(function(f) {
+        var name = f.name.replace(/\.(jpg|jpeg|png|webp)$/i, "");
+        var url = "https://lh3.googleusercontent.com/d/" + f.id + "=w400";
+        GDRIVE_IMG_MAP[name] = url;
+        GDRIVE_IMG_MAP[name.toUpperCase()] = url;
+      });
+      GDRIVE_LOADED = true;
+      console.log("GDrive images loaded from cache: " + files.length + " files");
+      return;
+    }
+  } catch(e) {}
+
+  fetch(GDRIVE_SCRIPT_URL).then(function(r) { return r.json(); }).then(function(data) {
+    if (data && data.files) {
+      data.files.forEach(function(f) {
+        var name = f.name.replace(/\.(jpg|jpeg|png|webp)$/i, "");
+        var url = "https://lh3.googleusercontent.com/d/" + f.id + "=w400";
+        GDRIVE_IMG_MAP[name] = url;
+        GDRIVE_IMG_MAP[name.toUpperCase()] = url;
+      });
+      GDRIVE_LOADED = true;
+      console.log("GDrive images loaded: " + data.files.length + " files");
+      try { sessionStorage.setItem("gdrive_cache", JSON.stringify(data.files)); sessionStorage.setItem("gdrive_cache_time", String(Date.now())); } catch(e) {}
+      // trigger re-render
+      if (window.__refreshApp) window.__refreshApp();
+    }
+  }).catch(function(e) { console.log("GDrive load failed: " + e); });
+}
+loadDriveImages();
+
+function getStyleImg(art) {
+  if (!art) return null;
+  var code = String(art).toUpperCase();
+  // Try exact match first
+  if (GDRIVE_IMG_MAP[code]) return GDRIVE_IMG_MAP[code];
+  // Try stripping trailing letters (517VE -> 517)
+  var numOnly = code.replace(/[A-Z]+$/, "");
+  if (GDRIVE_IMG_MAP[numOnly]) return GDRIVE_IMG_MAP[numOnly];
+  // Try partial match - find first key that starts with the code
+  var keys = Object.keys(GDRIVE_IMG_MAP);
+  for (var i = 0; i < keys.length; i++) {
+    if (keys[i].toUpperCase().indexOf(code) === 0 || code.indexOf(keys[i].toUpperCase()) === 0) return GDRIVE_IMG_MAP[keys[i]];
+  }
+  return null;
+}
+</script>
+
+<script type="text/babel">
+const{useState,useEffect,useCallback,useMemo,useRef}=React;
+
+// ====== SQL API LAYER ======
+const API_BASE = "/api/query"; // Netlify proxy path
+const DIRECT_API = "https://aggrievedly-spryest-hattie.ngrok-free.dev/V1/query";
+const API_TOKEN = "Sahiba_CZSfEghwaD4s";
+
+async function sqlQuery(query) {
+  // Try Netlify proxy first, fallback to direct ngrok
+  var endpoints = [API_BASE, DIRECT_API];
+  for (var ep of endpoints) {
+    try {
+      var res = await fetch(ep, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + API_TOKEN,
+          "ngrok-skip-browser-warning": "true"
+        },
+        body: JSON.stringify({ query: query })
+      });
+      if (res.ok) {
+        var data = await res.json();
+        if (data.status === "success" || data.data) return data.data || [];
+      }
+    } catch(e) { continue; }
+  }
+  return null; // both failed
+}
+
+// Pre-built queries from config
+const QUERIES = {
+  allInventory: "SELECT LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1) AS Articulo, SUM(EXISTENCIA) AS Stock FROM (SELECT Articulo, EXISTENCIA FROM PRODS_C UNION ALL SELECT Articulo, EXISTENCIA FROM PRODS_L UNION ALL SELECT Articulo, EXISTENCIA FROM PRODS_CHIN UNION ALL SELECT Articulo, EXISTENCIA FROM PRODS_LECU UNION ALL SELECT Articulo, EXISTENCIA FROM SAP_CC) AS A GROUP BY LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1)",
+  bodegaWithCost: "SELECT LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1) AS Articulo, ROUND(MAX(Costo),0) AS Costo, SUM(EXISTENCIA) AS Bodega_Stock FROM SAP_CC GROUP BY LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1)",
+  descriptions: "SELECT LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1) AS Articulo, MAX(Descripcion) AS Descripcion, MAX(Linea) AS Linea, ROUND(MAX(Precio_Venta),0) AS Precio_Venta FROM MOVS_LEONA GROUP BY LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1)",
+  storeStock: function(table) { return "SELECT LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1) AS Articulo, SUM(EXISTENCIA) AS Stock FROM " + table + " GROUP BY LEFT(Articulo, CHARINDEX('-', Articulo + '-') - 1)"; }
+};
+
+const STORE_TABLES = [
+  {code:"TS0005",name:"Bodega",table:"SAP_CC",key:"bodega"},
+  {code:"TS0001",name:"Leona Vicario",table:"PRODS_L",key:"leona"},
+  {code:"TS0002",name:"Cercunvalacion",table:"PRODS_C",key:"cercu"},
+  {code:"TS0003",name:"Lecumberri",table:"PRODS_LECU",key:"lecum"},
+  {code:"TS0004",name:"Chiconcuac",table:"PRODS_CHIN",key:"chinco"}
+];
+
+// ====== DATA HOOK ======
+function useProducts() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [apiStatus, setApiStatus] = useState("loading"); // loading, connected, offline
+  const [imgReady, setImgReady] = useState(GDRIVE_LOADED);
+
+  useEffect(() => {
+    var cancelled = false;
+    async function load() {
+      try {
+        // Parallel fetch: descriptions, bodega stock, all inventory, per-store
+        var [descs, bodega, allInv, leonaS, cercuS, lecumS, chincoS] = await Promise.all([
+          sqlQuery(QUERIES.descriptions),
+          sqlQuery(QUERIES.bodegaWithCost),
+          sqlQuery(QUERIES.allInventory),
+          sqlQuery(QUERIES.storeStock("PRODS_L")),
+          sqlQuery(QUERIES.storeStock("PRODS_C")),
+          sqlQuery(QUERIES.storeStock("PRODS_LECU")),
+          sqlQuery(QUERIES.storeStock("PRODS_CHIN"))
+        ]);
+
+        if (cancelled) return;
+
+        if (!descs && !bodega && !allInv) {
+          setApiStatus("offline");
+          setLoading(false);
+          return;
+        }
+
+        setApiStatus("connected");
+
+        // Build lookup maps
+        var descMap = {};
+        if (descs) descs.forEach(function(r) { descMap[r.Articulo] = r; });
+
+        var bodegaMap = {};
+        if (bodega) bodega.forEach(function(r) { bodegaMap[r.Articulo] = r; });
+
+        var invMap = {};
+        if (allInv) allInv.forEach(function(r) { invMap[r.Articulo] = r.Stock; });
+
+        var storeMap = { leona:{}, cercu:{}, lecum:{}, chinco:{} };
+        if (leonaS) leonaS.forEach(function(r) { storeMap.leona[r.Articulo] = r.Stock; });
+        if (cercuS) cercuS.forEach(function(r) { storeMap.cercu[r.Articulo] = r.Stock; });
+        if (lecumS) lecumS.forEach(function(r) { storeMap.lecum[r.Articulo] = r.Stock; });
+        if (chincoS) chincoS.forEach(function(r) { storeMap.chinco[r.Articulo] = r.Stock; });
+
+        // Merge into product list - use all unique article codes
+        var allCodes = new Set();
+        Object.keys(descMap).forEach(function(k) { allCodes.add(k); });
+        Object.keys(bodegaMap).forEach(function(k) { allCodes.add(k); });
+        Object.keys(invMap).forEach(function(k) { allCodes.add(k); });
+
+        var prods = [];
+        allCodes.forEach(function(code) {
+          var d = descMap[code] || {};
+          var b = bodegaMap[code] || {};
+          var totalStock = invMap[code] || 0;
+          var bodegaStock = b.Bodega_Stock || 0;
+          var cost = b.Costo || 0;
+          var price = d.Precio_Venta || 0;
+
+          if (totalStock <= 0 && !d.Descripcion) return; // skip empty
+
+          prods.push({
+            style: code,
+            name: d.Descripcion || code,
+            category: d.Linea || "General",
+            price: price,
+            wholesale: cost,
+            stock: totalStock,
+            bodega: bodegaStock,
+            leona: storeMap.leona[code] || 0,
+            cercu: storeMap.cercu[code] || 0,
+            lecum: storeMap.lecum[code] || 0,
+            chinco: storeMap.chinco[code] || 0,
+            reserved: 0
+          });
+        });
+
+        // Sort by stock descending
+        prods.sort(function(a, b) { return b.stock - a.stock; });
+
+        if (!cancelled) {
+          setProducts(prods);
+          setLoading(false);
+        }
+      } catch(e) {
+        console.error("Data load error:", e);
+        if (!cancelled) { setApiStatus("offline"); setLoading(false); }
+      }
+    }
+    load();
+
+    // Check GDrive periodically
+    var gdCheck = setInterval(function() {
+      if (GDRIVE_LOADED && !imgReady) setImgReady(true);
+    }, 1000);
+
+    return function() { cancelled = true; clearInterval(gdCheck); };
+  }, []);
+
+  // Register refresh callback for GDrive
+  useEffect(function() {
+    window.__refreshApp = function() { setImgReady(true); };
+    return function() { window.__refreshApp = null; };
+  }, []);
+
+  return { products, loading, apiStatus, imgReady };
+}
+
+// ====== PRODUCT IMAGE COMPONENT ======
+function ProductImg({ style, size, className }) {
+  const [src, setSrc] = useState(null);
+  const [err, setErr] = useState(false);
+
+  useEffect(function() {
+    var url = getStyleImg(style);
+    if (url) {
+      setSrc(size === "large" ? url.replace("=w400", "=w800") : url);
+      setErr(false);
+    } else {
+      setSrc(null);
+    }
+  }, [style, size]);
+
+  if (src && !err) {
+    return <img src={src} alt={style} onError={function() { setErr(true); }} style={{width:"100%",height:"100%",objectFit:size==="large"?"contain":"cover"}} />;
+  }
+  return <span className="pi-ph">{style || "?"}</span>;
+}
+
+// ====== i18n ======
+const T={
+en:{
+dashboard:"Dashboard",myDashboard:"My Dashboard",accounts:"Chain Accounts",catalog:"Product Catalog",pipeline:"Pipeline",orders:"Orders",
+quotes:"Quotes",techDocs:"Tech Documents",samples:"Sample Tracking",inventory:"Inventory",delivery:"Delivery",invoices:"Invoices",
+docs:"Documents",notifs:"Notifications",reports:"Reports",settings:"Settings",
+main:"Main",sales:"Sales",operations:"Operations",system:"System",
+totalOrders:"Total Orders",pipelineRev:"Pipeline Revenue",pending:"Pending",delivered:"Delivered",unpaid:"Unpaid",activeChains:"Active Chains",
+salesBySp:"Sales by Rep",topProducts:"Top Products",recentOrders:"Recent Orders",sampleTracking:"Sample Tracking",
+order:"Order",chain:"Chain",buyer:"Buyer",total:"Total",rep:"Rep",status:"Status",date:"Date",
+style:"Style",name:"Name",category:"Category",fabric:"Fabric",sizes:"Sizes",colors:"Colors",price:"Price",wholesale:"Wholesale / Cost",stock:"Stock",
+search:"Search...",allCategories:"All Categories",allStages:"All Stages",allChains:"All Chains",
+newOrder:"+ New Order",newQuote:"+ New Quote",newAccount:"+ New Account",
+orderDetails:"Order Details",products:"Products",notes:"Notes",timeline:"Timeline",
+buyerContact:"Buyer Contact",commercialTerms:"Commercial Terms",deliveryRules:"Delivery Rules",
+phone:"Phone",payment:"Payment",branches:"Branches",assigned:"Assigned",
+active:"Active",prospect:"Prospect",pcs:"pcs",inStock:"In Stock",low:"Low",critical:"Critical",
+lead:"Lead",meetingSched:"Meeting",samplesSent:"Samples",techSheet:"Tech Sheet",orderPending:"Pending",approved:"Approved",
+inProd:"Production",readyShip:"Ready to Ship",paid:"Paid",
+followUps:"Follow-ups Due Today",pendingQuotes:"Pending Quotes",myOrders:"My Orders",myAccounts:"My Accounts",
+createQuote:"Create Quote",quoteFor:"Quote For",selectChain:"Select Chain",addItems:"Add Items",selectProduct:"Select Product",qty:"Quantity",
+quoteItems:"Quote Items",unitPrice:"Unit Price",subtotal:"Subtotal",generatePdf:"Generate PDF",send:"Send",save:"Save",cancel:"Cancel",
+docType:"Document Type",generateDoc:"Generate Document",fichaTecnica:"Ficha Tecnica",compositionSheet:"Composition Sheet",
+careInstructions:"Care Instructions",barcodeSheet:"Barcode Sheet",labelCompliance:"Label Compliance",packingList:"Packing List",
+priceSheet:"Price Sheet",vendorForms:"Vendor Registration",generating:"Generating...",generated:"Generated",
+sampleId:"Sample ID",itemsGiven:"Items Given",dateGiven:"Date Given",responseDate:"Response Date",followUp:"Follow Up",
+overdue:"Overdue",warehouse:"Bodega",store1:"Leona",store2:"Cercunvalacion",store3:"Lecumberri",store4:"Chiconcuac",totalStock:"Total Stock",
+reserved:"Reserved",available:"Available",location:"Location",
+dispatchDate:"Dispatch Date",transporter:"Transporter",trackingNo:"Tracking No.",deliveryStatus:"Delivery Status",proofOfDelivery:"Proof of Delivery",
+dispatched:"Dispatched",inTransit:"In Transit",
+invoiceNo:"Invoice No.",dueDate:"Due Date",amount:"Amount",invoiceStatus:"Invoice Status",
+draft:"Draft",sent:"Sent",paidInv:"Paid",overdueInv:"Overdue",
+uploadType:"Upload Type",meetingNotes:"Meeting Notes",reqFiles:"Requirement Files",signedOrders:"Signed Orders",
+deliveryProof:"Delivery Proof",storePhotos:"Store Visit Photos",uploadFile:"Upload File",
+channel:"Channel",type:"Type",message:"Message",scheduledFor:"Scheduled For",
+totalRevenue:"Total Revenue",avgOrderValue:"Avg Order Value",conversionRate:"Conversion Rate",
+monthlySales:"Monthly Sales",chainPerformance:"Chain Performance",repPerformance:"Rep Performance",
+auditLog:"Audit Log",userMgmt:"User Management",chainTemplates:"Chain Templates",pricingControl:"Pricing Control",
+generalSettings:"General Settings",notifSettings:"Notification Settings",
+whatsapp:"WhatsApp",email:"Email",enabled:"Enabled",disabled:"Disabled",
+action:"Action",user:"User",time:"Time",detail:"Detail",
+logout:"Sign Out",vsLastMonth:"vs last month",noOrders:"No orders",lowStockAlerts:"Low Stock Alerts",
+liveProducts:"Live Products",loadingData:"Loading live data...",apiConnected:"SQL API Connected",apiOffline:"API Offline - Using Cache",
+imagesLoaded:"Images Loaded",overview:"Overview",byChain:"By Chain",byRep:"By Rep",
+reserved2:"Reserved",movementLog:"Movement Log",stockAlerts:"Stock Alerts",
+schedNotifs:"Scheduled",sentNotifs:"Sent",bodega:"Bodega",cost:"Cost"
+},
+es:{
+dashboard:"Dashboard",myDashboard:"Mi Dashboard",accounts:"Cuentas Cadena",catalog:"Catalogo",pipeline:"Pipeline",orders:"Pedidos",
+quotes:"Cotizaciones",techDocs:"Fichas Tecnicas",samples:"Muestras",inventory:"Inventario",delivery:"Entregas",invoices:"Facturas",
+docs:"Documentos",notifs:"Notificaciones",reports:"Reportes",settings:"Ajustes",
+main:"Principal",sales:"Ventas",operations:"Operaciones",system:"Sistema",
+totalOrders:"Total Pedidos",pipelineRev:"Ingresos Pipeline",pending:"Pendientes",delivered:"Entregados",unpaid:"Sin Cobrar",activeChains:"Cadenas Activas",
+salesBySp:"Ventas por Vendedora",topProducts:"Productos Top",recentOrders:"Pedidos Recientes",sampleTracking:"Seguimiento Muestras",
+order:"Pedido",chain:"Cadena",buyer:"Comprador",total:"Total",rep:"Vendedora",status:"Estado",date:"Fecha",
+style:"Estilo",name:"Nombre",category:"Linea",fabric:"Tela",sizes:"Tallas",colors:"Colores",price:"Precio",wholesale:"Mayoreo / Costo",stock:"Stock",
+search:"Buscar...",allCategories:"Todas las Lineas",allStages:"Todos los Estados",allChains:"Todas las Cadenas",
+newOrder:"+ Nuevo Pedido",newQuote:"+ Nueva Cotizacion",newAccount:"+ Nueva Cuenta",
+orderDetails:"Detalles del Pedido",products:"Productos",notes:"Notas",timeline:"Linea de Tiempo",
+buyerContact:"Contacto Comprador",commercialTerms:"Terminos Comerciales",deliveryRules:"Reglas de Entrega",
+phone:"Telefono",payment:"Pago",branches:"Sucursales",assigned:"Asignada",
+active:"Activo",prospect:"Prospecto",pcs:"pzas",inStock:"En Stock",low:"Bajo",critical:"Critico",
+lead:"Lead",meetingSched:"Reunion",samplesSent:"Muestras",techSheet:"Ficha Tec.",orderPending:"Pendiente",approved:"Aprobado",
+inProd:"Produccion",readyShip:"Listo Envio",paid:"Pagado",
+followUps:"Seguimientos del Dia",pendingQuotes:"Cotizaciones Pendientes",myOrders:"Mis Pedidos",myAccounts:"Mis Cuentas",
+createQuote:"Crear Cotizacion",quoteFor:"Cotizacion Para",selectChain:"Seleccionar Cadena",addItems:"Agregar Articulos",selectProduct:"Seleccionar Producto",qty:"Cantidad",
+quoteItems:"Articulos",unitPrice:"Precio Unitario",subtotal:"Subtotal",generatePdf:"Generar PDF",send:"Enviar",save:"Guardar",cancel:"Cancelar",
+docType:"Tipo de Documento",generateDoc:"Generar Documento",fichaTecnica:"Ficha Tecnica",compositionSheet:"Hoja de Composicion",
+careInstructions:"Instrucciones de Cuidado",barcodeSheet:"Hoja de Codigos de Barras",labelCompliance:"Cumplimiento de Etiqueta",packingList:"Lista de Empaque",
+priceSheet:"Lista de Precios",vendorForms:"Formatos de Registro",generating:"Generando...",generated:"Generado",
+sampleId:"ID Muestra",itemsGiven:"Articulos",dateGiven:"Fecha Entrega",responseDate:"Fecha Respuesta",followUp:"Seguimiento",
+overdue:"Vencido",warehouse:"Bodega",store1:"Leona",store2:"Cercunvalacion",store3:"Lecumberri",store4:"Chiconcuac",totalStock:"Stock Total",
+reserved:"Reservado",available:"Disponible",location:"Ubicacion",
+dispatchDate:"Fecha Envio",transporter:"Transportista",trackingNo:"No. Guia",deliveryStatus:"Estado Entrega",proofOfDelivery:"Comprobante",
+dispatched:"Despachado",inTransit:"En Transito",
+invoiceNo:"No. Factura",dueDate:"Fecha Limite",amount:"Monto",invoiceStatus:"Estado Factura",
+draft:"Borrador",sent:"Enviada",paidInv:"Pagada",overdueInv:"Vencida",
+uploadType:"Tipo",meetingNotes:"Notas de Reunion",reqFiles:"Archivos Requisitos",signedOrders:"Pedidos Firmados",
+deliveryProof:"Comprobante Entrega",storePhotos:"Fotos de Tienda",uploadFile:"Subir Archivo",
+channel:"Canal",type:"Tipo",message:"Mensaje",scheduledFor:"Programado Para",
+totalRevenue:"Ingresos Totales",avgOrderValue:"Ticket Promedio",conversionRate:"Tasa Conversion",
+monthlySales:"Ventas Mensuales",chainPerformance:"Rendimiento por Cadena",repPerformance:"Rendimiento por Vendedora",
+auditLog:"Registro de Auditoria",userMgmt:"Gestion de Usuarios",chainTemplates:"Plantillas de Cadena",pricingControl:"Control de Precios",
+generalSettings:"Ajustes Generales",notifSettings:"Ajustes de Notificaciones",
+whatsapp:"WhatsApp",email:"Correo",enabled:"Activo",disabled:"Inactivo",
+action:"Accion",user:"Usuario",time:"Hora",detail:"Detalle",
+logout:"Cerrar Sesion",vsLastMonth:"vs mes anterior",noOrders:"Sin pedidos",lowStockAlerts:"Alertas de Stock",
+liveProducts:"Productos en Vivo",loadingData:"Cargando datos en vivo...",apiConnected:"SQL API Conectado",apiOffline:"API Sin Conexion",
+imagesLoaded:"Imagenes Cargadas",overview:"General",byChain:"Por Cadena",byRep:"Por Vendedora",
+reserved2:"Reservado",movementLog:"Movimientos",stockAlerts:"Alertas Stock",
+schedNotifs:"Programadas",sentNotifs:"Enviadas",bodega:"Bodega",cost:"Costo"
+}
+};
+
+// ====== MOCK CRM DATA (not in SQL) ======
+const USERS=[
+{name:"Jessie",role:"admin",pin:"1234",initials:"JE"},
+{name:"Ingrid",role:"salesperson",pin:"5678",initials:"IN"},
+{name:"Cynthia",role:"salesperson",pin:"9012",initials:"CY"},
+{name:"Sonia",role:"salesperson",pin:"3456",initials:"SO"},
+{name:"Almacen",role:"warehouse",pin:"7890",initials:"WH"}
+];
+const CHAINS=[
+{id:"CH001",name:"Soriana",hq:"Monterrey, NL",buyer:"Lic. Roberto Mendez",phone:"+52 81 1234 5678",paymentTerms:"Net 60",deliveryRules:"Must include barcode sheet + ficha tecnica",branches:142,status:"active",assigned:"Ingrid"},
+{id:"CH002",name:"Comercial Mexicana",hq:"CDMX",buyer:"Ing. Patricia Olvera",phone:"+52 55 9876 5432",paymentTerms:"Net 45",deliveryRules:"Require composition sheet per style",branches:87,status:"active",assigned:"Cynthia"},
+{id:"CH003",name:"Chedraui",hq:"Xalapa, VER",buyer:"Lic. Ana Torres",phone:"+52 22 5555 1234",paymentTerms:"Net 30",deliveryRules:"Packing list required, max 50 units per box",branches:310,status:"prospect",assigned:"Sonia"},
+{id:"CH004",name:"Liverpool",hq:"CDMX",buyer:"Lic. Fernando Reyes",phone:"+52 55 4444 7890",paymentTerms:"Net 90",deliveryRules:"Label compliance mandatory, hangtags required",branches:130,status:"prospect",assigned:"Ingrid"}
+];
+var ORDERS_DB=[
+{id:"ORD-001",quoteId:"QT-001",chain:"Soriana",buyer:"Lic. Roberto Mendez",items:[{style:"517",name:"Vestido Playa Estampado",qty:500,unitPrice:450,shipped:500,delivered:500},{style:"318",name:"Blusa Blanca Playa",qty:300,unitPrice:295,shipped:300,delivered:300}],total:352500,stage:"approved",salesperson:"Ingrid",date:"2026-04-01",notes:"Entrega en CEDIS Monterrey",reserved:true,history:[{date:"2026-03-29",action:"created",user:"Ingrid",detail:"Pedido creado desde QT-001"},{date:"2026-04-01",action:"approved",user:"Jessie",detail:"Aprobado - inventario reservado"}]},
+{id:"ORD-002",quoteId:null,chain:"Comercial Mexicana",buyer:"Ing. Patricia Olvera",items:[{style:"422",name:"Falda Midi Floral",qty:200,unitPrice:380,shipped:0,delivered:0},{style:"615",name:"Pantalon Palazzo",qty:150,unitPrice:490,shipped:0,delivered:0}],total:149500,stage:"technical_sheet_submitted",salesperson:"Cynthia",date:"2026-04-05",notes:"Pendiente ficha tecnica 615",reserved:false,history:[{date:"2026-04-05",action:"created",user:"Cynthia",detail:"Pedido directo"},{date:"2026-04-05",action:"tech_sheet",user:"Cynthia",detail:"Ficha tecnica enviada"}]},
+{id:"ORD-003",quoteId:null,chain:"Soriana",buyer:"Lic. Roberto Mendez",items:[{style:"119",name:"Top Crop Tejido",qty:1000,unitPrice:195,shipped:0,delivered:0}],total:195000,stage:"samples_sent",salesperson:"Ingrid",date:"2026-04-08",notes:"Muestra enviada, esperando respuesta",reserved:false,history:[{date:"2026-04-08",action:"created",user:"Ingrid",detail:"Pedido creado"},{date:"2026-04-08",action:"samples",user:"Ingrid",detail:"Muestras enviadas"}]},
+{id:"ORD-004",quoteId:"QT-003",chain:"Chedraui",buyer:"Lic. Ana Torres",items:[{style:"733",name:"Kimono Largo",qty:100,unitPrice:625,shipped:0,delivered:0},{style:"201",name:"Vestido Camisero",qty:250,unitPrice:425,shipped:0,delivered:0}],total:168750,stage:"lead",salesperson:"Sonia",date:"2026-04-10",notes:"Primera reunion programada",reserved:false,history:[{date:"2026-04-10",action:"created",user:"Sonia",detail:"Desde cotizacion QT-003"}]},
+{id:"ORD-005",quoteId:null,chain:"Comercial Mexicana",buyer:"Ing. Patricia Olvera",items:[{style:"517",name:"Vestido Playa Estampado",qty:400,unitPrice:450,shipped:400,delivered:0}],total:180000,stage:"ready_to_ship",salesperson:"Cynthia",date:"2026-03-25",notes:"Listo para envio CEDIS Sur",reserved:true,history:[{date:"2026-03-25",action:"created",user:"Cynthia",detail:"Pedido directo"},{date:"2026-03-26",action:"approved",user:"Jessie",detail:"Aprobado"},{date:"2026-04-08",action:"ready",user:"Almacen",detail:"Empacado y listo"}]},
+{id:"ORD-006",quoteId:null,chain:"Liverpool",buyer:"Lic. Fernando Reyes",items:[{style:"615",name:"Pantalon Palazzo",qty:300,unitPrice:490,shipped:0,delivered:0},{style:"544",name:"Shorts Playa",qty:200,unitPrice:225,shipped:0,delivered:0}],total:192000,stage:"meeting_scheduled",salesperson:"Ingrid",date:"2026-04-11",notes:"Cita con comprador viernes 11am",reserved:false,history:[{date:"2026-04-11",action:"created",user:"Ingrid",detail:"Lead de Liverpool"}]},
+{id:"ORD-007",quoteId:null,chain:"Soriana",buyer:"Lic. Roberto Mendez",items:[{style:"201",name:"Vestido Camisero",qty:600,unitPrice:425,shipped:600,delivered:600}],total:255000,stage:"delivered",salesperson:"Ingrid",date:"2026-03-15",notes:"Entregado, pendiente factura",reserved:false,history:[{date:"2026-03-15",action:"created",user:"Ingrid",detail:"Pedido creado"},{date:"2026-03-16",action:"approved",user:"Jessie",detail:"Aprobado"},{date:"2026-03-18",action:"dispatched",user:"Almacen",detail:"Enviado via FedEx"},{date:"2026-03-20",action:"delivered",user:"Almacen",detail:"Entregado en CEDIS"}]},
+{id:"ORD-008",quoteId:null,chain:"Comercial Mexicana",buyer:"Ing. Patricia Olvera",items:[{style:"119",name:"Top Crop Tejido",qty:800,unitPrice:195,shipped:800,delivered:800}],total:156000,stage:"paid",salesperson:"Cynthia",date:"2026-03-01",notes:"Pagado",reserved:false,history:[{date:"2026-03-01",action:"created",user:"Cynthia",detail:"Pedido creado"},{date:"2026-03-02",action:"approved",user:"Jessie",detail:"Aprobado"},{date:"2026-03-05",action:"dispatched",user:"Almacen",detail:"Enviado"},{date:"2026-03-08",action:"delivered",user:"Almacen",detail:"Entregado"},{date:"2026-04-10",action:"paid",user:"Jessie",detail:"Pago recibido"}]}
+];
+var ORDER_SEQ=9;
+const STAGES=[
+{key:"lead",color:"var(--t3)",bc:""},{key:"meeting_scheduled",color:"var(--ac)",bc:"bd-bl"},{key:"samples_sent",color:"var(--cy)",bc:"bd-cy"},
+{key:"technical_sheet_submitted",color:"var(--pk)",bc:"bd-pk"},{key:"order_pending",color:"var(--yw)",bc:"bd-yw"},{key:"approved",color:"var(--ac)",bc:"bd-bl"},
+{key:"in_production",color:"var(--or)",bc:"bd-or"},{key:"ready_to_ship",color:"var(--cy)",bc:"bd-cy"},{key:"delivered",color:"var(--gn)",bc:"bd-gn"},{key:"paid",color:"var(--gn)",bc:"bd-gn"}
+];
+const SAMPLES=[
+{id:"SMP-001",chain:"Soriana",buyer:"Lic. Roberto Mendez",items:"517 x3, 318 x2",dateGiven:"2026-04-02",salesperson:"Ingrid",responseDate:"2026-04-12",status:"pending",notes:"Esperando aprobacion de colores"},
+{id:"SMP-002",chain:"Chedraui",buyer:"Lic. Ana Torres",items:"733 x1, 201 x2",dateGiven:"2026-04-08",salesperson:"Sonia",responseDate:"2026-04-18",status:"pending",notes:"Primera muestra enviada"},
+{id:"SMP-003",chain:"Liverpool",buyer:"Lic. Fernando Reyes",items:"615 x2, 544 x2",dateGiven:"2026-04-05",salesperson:"Ingrid",responseDate:"2026-04-15",status:"overdue",notes:"Sin respuesta, dar seguimiento"}
+];
+const CHAIN_RULES={
+"Soriana":{docs:["ficha_tecnica","barcode_sheet","composition_sheet"],packingMax:null,labelReq:false,payTerms:"Net 60",notes:"Entrega en CEDIS. Requiere ficha tecnica + hoja de codigos de barras + composicion por estilo."},
+"Comercial Mexicana":{docs:["composition_sheet"],packingMax:null,labelReq:false,payTerms:"Net 45",notes:"Requiere hoja de composicion por estilo. Envio a CEDIS centralizado."},
+"Chedraui":{docs:["packing_list"],packingMax:50,labelReq:false,payTerms:"Net 30",notes:"Lista de empaque obligatoria. Maximo 50 unidades por caja."},
+"Liverpool":{docs:["label_compliance","barcode_sheet"],packingMax:null,labelReq:true,payTerms:"Net 90",notes:"Cumplimiento de etiqueta obligatorio. Hangtags requeridos en cada prenda."}
+};
+
+var QUOTES_DB=[
+{id:"QT-001",chain:"Soriana",buyer:"Lic. Roberto Mendez",items:[{style:"517",name:"Vestido Playa Estampado",qty:500,unitPrice:450,barcode:"7501234000517"},{style:"318",name:"Blusa Blanca Playa",qty:300,unitPrice:295,barcode:"7501234000318"}],subtotal:313500,discount:0,total:313500,status:"sent",salesperson:"Ingrid",date:"2026-03-28",validUntil:"2026-04-28",notes:"Entrega en CEDIS Monterrey",history:[{date:"2026-03-28",action:"created",user:"Ingrid",detail:"Cotizacion creada"},{date:"2026-03-28",action:"sent",user:"Ingrid",detail:"Enviada al comprador"}]},
+{id:"QT-002",chain:"Liverpool",buyer:"Lic. Fernando Reyes",items:[{style:"615",name:"Pantalon Palazzo",qty:300,unitPrice:490,barcode:"7501234000615"},{style:"544",name:"Shorts Playa",qty:200,unitPrice:225,barcode:"7501234000544"}],subtotal:192000,discount:0,total:192000,status:"draft",salesperson:"Ingrid",date:"2026-04-10",validUntil:"2026-05-10",notes:"Pendiente aprobacion de etiquetas",history:[{date:"2026-04-10",action:"created",user:"Ingrid",detail:"Cotizacion creada"}]},
+{id:"QT-003",chain:"Chedraui",buyer:"Lic. Ana Torres",items:[{style:"733",name:"Kimono Largo",qty:100,unitPrice:625,barcode:"7501234000733"},{style:"201",name:"Vestido Camisero",qty:250,unitPrice:425,barcode:"7501234000201"}],subtotal:168750,discount:0,total:168750,status:"approved",salesperson:"Sonia",date:"2026-04-05",validUntil:"2026-05-05",notes:"Aprobada - generar pedido",history:[{date:"2026-04-05",action:"created",user:"Sonia",detail:"Cotizacion creada"},{date:"2026-04-06",action:"sent",user:"Sonia",detail:"Enviada"},{date:"2026-04-09",action:"approved",user:"Sonia",detail:"Aprobada por Lic. Ana Torres"}]}
+];
+var QUOTE_SEQ=4;
+const DELIVERIES=[
+{id:"DEL-001",orderId:"ORD-007",chain:"Soriana",dispatchDate:"2026-03-14",transporter:"FedEx MX",trackingNo:"FX-8827364",status:"delivered",proofUploaded:true},
+{id:"DEL-002",orderId:"ORD-005",chain:"Comercial Mexicana",dispatchDate:"2026-04-10",transporter:"Estafeta",trackingNo:"EST-4412890",status:"in_transit",proofUploaded:false},
+{id:"DEL-003",orderId:"ORD-008",chain:"Comercial Mexicana",dispatchDate:"2026-02-28",transporter:"DHL MX",trackingNo:"DHL-9981234",status:"delivered",proofUploaded:true}
+];
+const INVOICES=[
+{id:"INV-001",orderId:"ORD-008",chain:"Comercial Mexicana",amount:156000,status:"paid",issueDate:"2026-03-02",dueDate:"2026-04-16",paidDate:"2026-04-10"},
+{id:"INV-002",orderId:"ORD-007",chain:"Soriana",amount:255000,status:"sent",issueDate:"2026-03-20",dueDate:"2026-05-19",paidDate:null},
+{id:"INV-003",orderId:"ORD-001",chain:"Soriana",amount:352500,status:"draft",issueDate:"2026-04-08",dueDate:"2026-06-07",paidDate:null}
+];
+const DOCS_MEDIA=[
+{id:"DOC-001",type:"meeting_notes",chain:"Soriana",fileName:"Notas_reunion_Soriana_Mar28.pdf",uploadedBy:"Ingrid",date:"2026-03-28",size:"1.2 MB"},
+{id:"DOC-002",type:"signed_order",chain:"Comercial Mexicana",fileName:"PO_ComMex_ORD008_signed.pdf",uploadedBy:"Cynthia",date:"2026-03-01",size:"2.4 MB"},
+{id:"DOC-003",type:"store_photos",chain:"Liverpool",fileName:"Liverpool_Polanco_visit.zip",uploadedBy:"Ingrid",date:"2026-04-05",size:"8.7 MB"},
+{id:"DOC-004",type:"req_files",chain:"Chedraui",fileName:"Chedraui_vendor_requirements.xlsx",uploadedBy:"Sonia",date:"2026-04-09",size:"340 KB"}
+];
+const NOTIFS=[
+{id:"N-001",channel:"whatsapp",type:"follow_up",message:"Seguimiento muestra SMP-003 Liverpool",scheduledFor:"2026-04-11 09:00",status:"pending",recipient:"Ingrid"},
+{id:"N-002",channel:"email",type:"paperwork",message:"Ficha tecnica pendiente ORD-002",scheduledFor:"2026-04-11 10:00",status:"sent",recipient:"Cynthia"},
+{id:"N-003",channel:"whatsapp",type:"delivery",message:"Envio DEL-002 en transito",scheduledFor:"2026-04-10 14:00",status:"sent",recipient:"Cynthia"},
+{id:"N-004",channel:"email",type:"unpaid",message:"Factura INV-002 vence en 30 dias",scheduledFor:"2026-04-19 08:00",status:"scheduled",recipient:"Ingrid"}
+];
+const AUDIT_LOG=[
+{time:"2026-04-11 14:23",user:"Jessie",action:"Updated pricing",detail:"Style 517 wholesale: $420 -> $450"},
+{time:"2026-04-11 11:05",user:"Ingrid",action:"Created order",detail:"ORD-006 Liverpool $192,000"},
+{time:"2026-04-10 16:40",user:"Cynthia",action:"Uploaded document",detail:"PO signed - Comercial Mexicana"},
+{time:"2026-04-10 09:15",user:"Almacen",action:"Dispatched order",detail:"ORD-005 via Estafeta"},
+{time:"2026-04-09 13:30",user:"Sonia",action:"Created quote",detail:"QT-003 Chedraui $168,750"}
+];
+
+const fmt=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:0}).format(n);
+const fmtD=d=>{try{const dt=new Date(d+"T12:00:00");return dt.toLocaleDateString("es-MX",{day:"numeric",month:"short"})}catch(e){return d}};
+const stageLabel=(key,lang)=>{const m={lead:T[lang].lead,meeting_scheduled:T[lang].meetingSched,samples_sent:T[lang].samplesSent,technical_sheet_submitted:T[lang].techSheet,order_pending:T[lang].orderPending,approved:T[lang].approved,in_production:T[lang].inProd,ready_to_ship:T[lang].readyShip,delivered:T[lang].delivered,paid:T[lang].paid};return m[key]||key};
+const stageBc=key=>(STAGES.find(s=>s.key===key)||{}).bc||"";
+function SB({stage,lang}){return <span className={"bd "+stageBc(stage)}>{stageLabel(stage,lang)}</span>}
+
+// ====== PIN LOGIN ======
+function PinLogin({onLogin}){
+const[user,setUser]=useState(USERS[0].name);const[pin,setPin]=useState("");const[error,setError]=useState("");
+const hit=d=>{if(pin.length>=4)return;const np=pin+d;setPin(np);setError("");if(np.length===4){const u=USERS.find(u2=>u2.name===user);if(u&&u.pin===np)setTimeout(()=>onLogin(u),200);else setTimeout(()=>{setError("PIN incorrecto");setPin("")},300)}};
+return(<div className="lw"><div className="lb">
+<div className="ll">SAHIBA</div><div className="ls">Chain Store CRM</div>
+<div className="lu">Usuario: <select value={user} onChange={e=>{setUser(e.target.value);setPin("");setError("")}}>{USERS.map(u=><option key={u.name} value={u.name}>{u.name} ({u.role})</option>)}</select></div>
+<div className="pd">{[0,1,2,3].map(i=><div key={i} className={"pdd"+(i<pin.length?(error?" e":" f"):"")}/>)}</div>
+<div className="pp">{[1,2,3,4,5,6,7,8,9].map(d=><button key={d} className="ppb" onClick={()=>hit(String(d))}>{d}</button>)}
+<button className="ppb c" onClick={()=>{setPin("");setError("")}}>CLR</button>
+<button className="ppb" onClick={()=>hit("0")}>0</button>
+<button className="ppb c" onClick={()=>setPin(pin.slice(0,-1))}>DEL</button></div>
+<div className="le">{error}</div>
+</div></div>);
+}
+
+// ====== DETAIL PANEL ======
+function DetailPanel({type,data,onClose,lang}){
+if(!data)return null;const t=T[lang];
+if(type==="order"){return(<div className="do" onClick={onClose}><div className="dp" onClick={e=>e.stopPropagation()}>
+<button className="dp-x" onClick={onClose}>X</button><h2>{data.id}</h2><div className="ds">{data.chain} - {data.buyer}</div>
+<div className="dps"><h3>{t.orderDetails}</h3>
+<div className="df"><span className="dl">{t.status}</span><span className="dv"><SB stage={data.stage} lang={lang}/></span></div>
+<div className="df"><span className="dl">{t.rep}</span><span className="dv">{data.salesperson}</span></div>
+<div className="df"><span className="dl">{t.date}</span><span className="dv">{fmtD(data.date)}</span></div>
+<div className="df"><span className="dl">{t.total}</span><span className="dv" style={{color:"var(--gn)"}}>{fmt(data.total)}</span></div></div>
+<div className="dps"><h3>{t.products}</h3>{data.items.map((it,i)=><div key={i} className="df"><span className="dl">#{it.style}</span><span className="dv">{it.qty} {t.pcs}</span></div>)}</div>
+<div className="dps"><h3>{t.notes}</h3><p style={{fontSize:12,color:"var(--t2)"}}>{data.notes}</p></div>
+</div></div>)}
+if(type==="account"){const co=ORDERS_DB.filter(o=>o.chain===data.name);const rev=co.reduce((s,o)=>s+o.total,0);
+return(<div className="do" onClick={onClose}><div className="dp" onClick={e=>e.stopPropagation()}>
+<button className="dp-x" onClick={onClose}>X</button><h2>{data.name}</h2><div className="ds">{data.hq}</div>
+<div className="dps"><h3>{t.buyerContact}</h3>
+<div className="df"><span className="dl">{t.name}</span><span className="dv">{data.buyer}</span></div>
+<div className="df"><span className="dl">{t.phone}</span><span className="dv">{data.phone}</span></div></div>
+<div className="dps"><h3>{t.commercialTerms}</h3>
+<div className="df"><span className="dl">{t.payment}</span><span className="dv">{data.paymentTerms}</span></div>
+<div className="df"><span className="dl">{t.branches}</span><span className="dv">{data.branches}</span></div>
+<div className="df"><span className="dl">{t.assigned}</span><span className="dv">{data.assigned}</span></div></div>
+<div className="dps"><h3>{t.deliveryRules}</h3><p style={{fontSize:12,color:"var(--t2)"}}>{data.deliveryRules}</p></div>
+<div className="dps"><h3>{t.orders} ({co.length}) - {fmt(rev)}</h3>
+{co.map(o=><div key={o.id} className="df"><span className="dl">{o.id} - {fmtD(o.date)}</span><span className="dv"><SB stage={o.stage} lang={lang}/></span></div>)}</div>
+</div></div>)}
+if(type==="product"){const p=data;return(<div className="do" onClick={onClose}><div className="dp" onClick={e=>e.stopPropagation()}>
+<button className="dp-x" onClick={onClose}>X</button>
+<div className="dp-img"><ProductImg style={p.style} size="large"/></div>
+<h2>{p.name}</h2><div className="ds">#{p.style} - {p.category}</div>
+<div className="dps"><h3>{t.price}</h3>
+<div className="df"><span className="dl">{t.price}</span><span className="dv">{fmt(p.price)}</span></div>
+<div className="df"><span className="dl">{t.cost}</span><span className="dv" style={{color:"var(--gn)"}}>{fmt(p.wholesale)}</span></div></div>
+<div className="dps"><h3>{t.inventory}</h3>
+<div className="df"><span className="dl">{t.totalStock}</span><span className="dv">{(p.stock||0).toLocaleString()} {t.pcs}</span></div>
+<div className="df"><span className="dl">{t.bodega}</span><span className="dv">{(p.bodega||0).toLocaleString()}</span></div>
+<div className="df"><span className="dl">{t.store1}</span><span className="dv">{(p.leona||0).toLocaleString()}</span></div>
+<div className="df"><span className="dl">{t.store2}</span><span className="dv">{(p.cercu||0).toLocaleString()}</span></div>
+<div className="df"><span className="dl">{t.store3}</span><span className="dv">{(p.lecum||0).toLocaleString()}</span></div>
+<div className="df"><span className="dl">{t.store4}</span><span className="dv">{(p.chinco||0).toLocaleString()}</span></div>
+<div className="df"><span className="dl">{t.reserved}</span><span className="dv" style={{color:"var(--yw)"}}>{(p.reserved||0).toLocaleString()}</span></div></div>
+</div></div>)}
+return null;
+}
+
+// ====== LIVE PRODUCT CATALOG ======
+function ProductCatalog({products,loading,apiStatus,nav,lang}){
+const t=T[lang];const[search,setSearch]=useState("");const[cat,setCat]=useState("all");const[page2,setPage2]=useState(1);
+const perPage=40;
+const cats=useMemo(()=>[...new Set(products.map(p=>p.category).filter(Boolean))].sort(),[products]);
+const filtered=useMemo(()=>products.filter(p=>{
+const ms=!search||p.name.toLowerCase().includes(search.toLowerCase())||p.style.toLowerCase().includes(search.toLowerCase());
+const mc=cat==="all"||p.category===cat;return ms&&mc;
+}),[products,search,cat]);
+const totalPages=Math.ceil(filtered.length/perPage);
+const pageItems=filtered.slice((page2-1)*perPage,page2*perPage);
+
+if(loading)return <div className="ld-wrap"><div className="ld-spin"></div><div className="ld-text">{t.loadingData}</div></div>;
+
+return(<div>
+<div className="fb">
+<input className="tb-s" placeholder={t.search} value={search} onChange={e=>{setSearch(e.target.value);setPage2(1)}} style={{width:220}}/>
+<select className="fs" value={cat} onChange={e=>{setCat(e.target.value);setPage2(1)}}><option value="all">{t.allCategories}</option>{cats.map(c=><option key={c} value={c}>{c}</option>)}</select>
+<div className="api-status"><div className={"api-dot "+(apiStatus==="connected"?"on":apiStatus==="loading"?"loading":"off")}></div>{apiStatus==="connected"?t.apiConnected:t.apiOffline}</div>
+<span style={{fontSize:11,color:"var(--t4)",marginLeft:"auto"}}>{filtered.length} {t.liveProducts}</span>
+</div>
+<div className="pg">{pageItems.map(p=><div key={p.style} className="pkd" onClick={()=>nav("product-detail",p)}>
+<div className="pi"><ProductImg style={p.style}/><div className="sb-k"><span className={"bd "+(p.stock>500?"bd-gn":p.stock>100?"bd-yw":"bd-rd")}>{p.stock>500?t.inStock:p.stock>100?t.low:t.critical}</span></div></div>
+<div className="pif"><div className="sn">#{p.style}</div><div className="pn">{p.name}</div>
+<div className="pp2">{p.wholesale>0?fmt(p.wholesale):""} {p.price>0?<span style={{fontSize:10,color:"var(--t4)",fontWeight:400}}> / {fmt(p.price)} venta</span>:""}</div>
+<div className="pcat">{p.category} - Stock: {(p.stock||0).toLocaleString()}</div></div>
+</div>)}</div>
+{totalPages>1&&<div style={{display:"flex",justifyContent:"center",gap:6,marginTop:18}}>
+{Array.from({length:Math.min(totalPages,10)},(_,i)=>i+1).map(pg=><button key={pg} className={"btn btn-s "+(pg===page2?"btn-p":"btn-g")} onClick={()=>setPage2(pg)}>{pg}</button>)}
+{totalPages>10&&<span style={{fontSize:11,color:"var(--t4)",padding:"6px"}}>...{totalPages}</span>}
+</div>}
+</div>);
+}
+
+// ====== LIVE INVENTORY ======
+function InventoryModule({products,loading,nav,lang}){
+const t=T[lang];const[tab,setTab]=useState("stock");const[search,setSearch]=useState("");
+const filtered=products.filter(p=>!search||p.style.toLowerCase().includes(search.toLowerCase())||p.name.toLowerCase().includes(search.toLowerCase()));
+if(loading)return <div className="ld-wrap"><div className="ld-spin"></div><div className="ld-text">{t.loadingData}</div></div>;
+return(<div>
+<div className="tabs">
+<div className={"tab"+(tab==="stock"?" a":"")} onClick={()=>setTab("stock")}>{t.stock}</div>
+<div className={"tab"+(tab==="alerts"?" a":"")} onClick={()=>setTab("alerts")}>{t.stockAlerts}</div>
+</div>
+<div className="fb"><input className="tb-s" placeholder={t.search} value={search} onChange={e=>setSearch(e.target.value)} style={{width:240}}/><span style={{fontSize:11,color:"var(--t4)"}}>{filtered.length} items</span></div>
+{tab==="stock"&&<div className="tw" style={{overflowX:"auto"}}><table className="dt"><thead><tr><th>{t.style}</th><th>{t.name}</th><th>{t.bodega}</th><th>{t.store1}</th><th>{t.store2}</th><th>{t.store3}</th><th>{t.store4}</th><th>{t.totalStock}</th><th>{t.cost}</th></tr></thead><tbody>
+{filtered.slice(0,100).map(p=><tr key={p.style} style={{cursor:"pointer"}} onClick={()=>nav("product-detail",p)}>
+<td style={{fontWeight:600,color:"var(--ac)"}}>#{p.style}</td><td style={{maxWidth:200,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.name}</td>
+<td>{(p.bodega||0).toLocaleString()}</td><td>{(p.leona||0).toLocaleString()}</td><td>{(p.cercu||0).toLocaleString()}</td><td>{(p.lecum||0).toLocaleString()}</td><td>{(p.chinco||0).toLocaleString()}</td>
+<td style={{fontWeight:600}}>{(p.stock||0).toLocaleString()}</td>
+<td style={{color:"var(--gn)"}}>{p.wholesale>0?fmt(p.wholesale):"-"}</td>
+</tr>)}</tbody></table></div>}
+{tab==="alerts"&&<div className="tw"><table className="dt"><thead><tr><th>{t.style}</th><th>{t.name}</th><th>{t.stock}</th><th>{t.status}</th></tr></thead><tbody>
+{filtered.filter(p=>p.stock>0&&p.stock<100).sort((a,b)=>a.stock-b.stock).slice(0,50).map(p=><tr key={p.style}><td style={{fontWeight:600}}>#{p.style}</td><td>{p.name}</td><td>{p.stock}</td><td><span className={"bd "+(p.stock<20?"bd-rd":"bd-yw")}>{p.stock<20?t.critical:t.low}</span></td></tr>)}
+</tbody></table></div>}
+</div>);
+}
+
+// ====== ALL OTHER MODULES (same as before, using products prop where needed) ======
+
+function AdminDash({nav,lang,products}){
+const t=T[lang];const tot=ORDERS_DB.length,rev=ORDERS_DB.reduce((s,o)=>s+o.total,0);
+const pend=ORDERS_DB.filter(o=>!["delivered","paid"].includes(o.stage)).length;
+const del2=ORDERS_DB.filter(o=>o.stage==="delivered").length;
+const bySp={};ORDERS_DB.forEach(o=>{bySp[o.salesperson]=(bySp[o.salesperson]||0)+o.total});
+const lowStock=products.filter(p=>p.stock>0&&p.stock<100).slice(0,5);
+return(<div>
+<div className="mg">
+<div className="mk"><div className="mk-l">{t.totalOrders}</div><div className="mk-v">{tot}</div><div className="mk-c" style={{color:"var(--gn)"}}>+12% {t.vsLastMonth}</div></div>
+<div className="mk"><div className="mk-l">{t.pipelineRev}</div><div className="mk-v" style={{color:"var(--gn)",fontSize:22}}>{fmt(rev)}</div></div>
+<div className="mk"><div className="mk-l">{t.pending}</div><div className="mk-v" style={{color:"var(--yw)"}}>{pend}</div></div>
+<div className="mk"><div className="mk-l">{t.delivered}</div><div className="mk-v" style={{color:"var(--gn)"}}>{del2}</div></div>
+<div className="mk"><div className="mk-l">{t.liveProducts}</div><div className="mk-v">{products.length}</div></div>
+<div className="mk"><div className="mk-l">{t.activeChains}</div><div className="mk-v">{CHAINS.filter(c=>c.status==="active").length}</div></div>
+</div>
+<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:24}}>
+<div><h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.salesBySp}</h3>
+<div className="tw"><table className="dt"><thead><tr><th>{t.rep}</th><th>{t.total}</th><th>{t.orders}</th></tr></thead><tbody>
+{Object.entries(bySp).sort((a,b)=>b[1]-a[1]).map(([n,v])=><tr key={n}><td style={{fontWeight:600}}>{n}</td><td style={{color:"var(--gn)"}}>{fmt(v)}</td><td>{ORDERS_DB.filter(o=>o.salesperson===n).length}</td></tr>)}
+</tbody></table></div></div>
+<div><h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.lowStockAlerts}</h3>
+<div className="tw"><table className="dt"><thead><tr><th>{t.style}</th><th>{t.name}</th><th>{t.stock}</th></tr></thead><tbody>
+{lowStock.map(p=><tr key={p.style}><td style={{fontWeight:600}}>#{p.style}</td><td style={{maxWidth:150,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.name}</td><td><span className={"bd "+(p.stock<20?"bd-rd":"bd-yw")}>{p.stock}</span></td></tr>)}
+</tbody></table></div></div>
+</div>
+<h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.recentOrders}</h3>
+<div className="tw"><table className="dt"><thead><tr><th>{t.order}</th><th>{t.chain}</th><th>{t.total}</th><th>{t.rep}</th><th>{t.status}</th><th>{t.date}</th></tr></thead><tbody>
+{ORDERS_DB.slice(0,6).map(o=><tr key={o.id} style={{cursor:"pointer"}} onClick={()=>nav("order-detail",o)}><td style={{fontWeight:600,color:"var(--ac)"}}>{o.id}</td><td>{o.chain}</td><td style={{color:"var(--gn)"}}>{fmt(o.total)}</td><td>{o.salesperson}</td><td><SB stage={o.stage} lang={lang}/></td><td>{fmtD(o.date)}</td></tr>)}
+</tbody></table></div>
+</div>);
+}
+
+function SalesDash({user,nav,lang}){const t=T[lang];const my=ORDERS_DB.filter(o=>o.salesperson===user.name);const mrev=my.reduce((s,o)=>s+o.total,0);const mpend=my.filter(o=>!["delivered","paid"].includes(o.stage));const macc=CHAINS.filter(c=>c.assigned===user.name);
+return(<div><div className="mg"><div className="mk"><div className="mk-l">{t.myOrders}</div><div className="mk-v">{my.length}</div></div><div className="mk"><div className="mk-l">{t.pipelineRev}</div><div className="mk-v" style={{color:"var(--gn)",fontSize:20}}>{fmt(mrev)}</div></div><div className="mk"><div className="mk-l">{t.pending}</div><div className="mk-v" style={{color:"var(--yw)"}}>{mpend.length}</div></div><div className="mk"><div className="mk-l">{t.myAccounts}</div><div className="mk-v">{macc.length}</div></div></div>
+<h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.followUps}</h3>
+<div className="tw" style={{marginBottom:20}}><table className="dt"><thead><tr><th>{t.type}</th><th>{t.chain}</th><th>{t.detail}</th><th>{t.action}</th></tr></thead><tbody>
+{SAMPLES.filter(s=>s.salesperson===user.name&&s.status==="overdue").map(s=><tr key={s.id}><td><span className="bd bd-rd">{t.overdue}</span></td><td>{s.chain}</td><td>{s.items}</td><td><button className="btn btn-s btn-g">{t.followUp}</button></td></tr>)}
+{mpend.slice(0,3).map(o=><tr key={o.id}><td><SB stage={o.stage} lang={lang}/></td><td>{o.chain}</td><td>{o.id} - {fmt(o.total)}</td><td><button className="btn btn-s btn-g" onClick={()=>nav("order-detail",o)}>Ver</button></td></tr>)}
+</tbody></table></div>
+<h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.myOrders}</h3>
+<div className="tw"><table className="dt"><thead><tr><th>{t.order}</th><th>{t.chain}</th><th>{t.total}</th><th>{t.status}</th><th>{t.date}</th></tr></thead><tbody>
+{my.map(o=><tr key={o.id} style={{cursor:"pointer"}} onClick={()=>nav("order-detail",o)}><td style={{fontWeight:600,color:"var(--ac)"}}>{o.id}</td><td>{o.chain}</td><td style={{color:"var(--gn)"}}>{fmt(o.total)}</td><td><SB stage={o.stage} lang={lang}/></td><td>{fmtD(o.date)}</td></tr>)}
+</tbody></table></div></div>);
+}
+
+function WarehouseDash({nav,lang}){const t=T[lang];const approved=ORDERS_DB.filter(o=>["approved","ready_to_ship"].includes(o.stage));
+return(<div><div className="mg"><div className="mk"><div className="mk-l">{t.approved}</div><div className="mk-v" style={{color:"var(--ac)"}}>{approved.length}</div></div><div className="mk"><div className="mk-l">{t.readyShip}</div><div className="mk-v" style={{color:"var(--cy)"}}>{ORDERS_DB.filter(o=>o.stage==="ready_to_ship").length}</div></div><div className="mk"><div className="mk-l">{t.inTransit}</div><div className="mk-v" style={{color:"var(--or)"}}>{DELIVERIES.filter(d=>d.status!=="delivered").length}</div></div><div className="mk"><div className="mk-l">{t.delivered}</div><div className="mk-v" style={{color:"var(--gn)"}}>{DELIVERIES.filter(d=>d.status==="delivered").length}</div></div></div>
+<h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.approved} {t.orders}</h3>
+<div className="tw" style={{marginBottom:20}}><table className="dt"><thead><tr><th>{t.order}</th><th>{t.chain}</th><th>{t.products}</th><th>{t.total}</th><th>{t.status}</th></tr></thead><tbody>
+{approved.map(o=><tr key={o.id}><td style={{fontWeight:600}}>{o.id}</td><td>{o.chain}</td><td style={{fontSize:11}}>{o.items.map(i=>"#"+i.style+" x"+i.qty).join(", ")}</td><td style={{color:"var(--gn)"}}>{fmt(o.total)}</td><td><SB stage={o.stage} lang={lang}/></td></tr>)}
+</tbody></table></div>
+<h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.delivery}</h3>
+<div className="tw"><table className="dt"><thead><tr><th>ID</th><th>{t.order}</th><th>{t.transporter}</th><th>{t.trackingNo}</th><th>{t.status}</th></tr></thead><tbody>
+{DELIVERIES.map(d=><tr key={d.id}><td style={{fontWeight:600}}>{d.id}</td><td>{d.orderId}</td><td>{d.transporter}</td><td style={{fontSize:11}}>{d.trackingNo}</td><td><span className={"bd "+(d.status==="delivered"?"bd-gn":"bd-or")}>{d.status==="delivered"?t.delivered:t.inTransit}</span></td></tr>)}
+</tbody></table></div></div>);
+}
+
+function AccountsCRM({user,nav,lang}){const t=T[lang];const accs=user.role==="admin"?CHAINS:CHAINS.filter(c=>c.assigned===user.name);const[search,setSearch]=useState("");
+const filtered=accs.filter(c=>c.name.toLowerCase().includes(search.toLowerCase())||c.buyer.toLowerCase().includes(search.toLowerCase()));
+return(<div><div className="fb"><input className="tb-s" placeholder={t.search} value={search} onChange={e=>setSearch(e.target.value)} style={{width:260}}/><button className="btn btn-p">{t.newAccount}</button></div>
+<div className="acs">{filtered.map(c=>{const co=ORDERS_DB.filter(o=>o.chain===c.name);const rev=co.reduce((s,o)=>s+o.total,0);return(<div key={c.id} className="akd" onClick={()=>nav("account-detail",c)}>
+<div className="ah"><div><div className="acn">{c.name}</div><div className="aby">{c.buyer} - {c.hq}</div></div><span className={"bd "+(c.status==="active"?"bd-gn":"bd-yw")}>{c.status==="active"?t.active:t.prospect}</span></div>
+<div style={{fontSize:11,color:"var(--t4)"}}>{t.assigned}: <span style={{color:"var(--ac)"}}>{c.assigned}</span></div>
+<div className="ast"><div><div className="asl">{t.orders}</div><div className="asv">{co.length}</div></div><div><div className="asl">{t.total}</div><div className="asv" style={{color:"var(--gn)",fontSize:12}}>{fmt(rev)}</div></div><div><div className="asl">{t.branches}</div><div className="asv">{c.branches}</div></div></div>
+</div>)})}</div></div>);
+}
+
+
+// ====== CHAIN RULES BANNER ======
+function ChainRulesBanner({chain}) {
+  var rules = CHAIN_RULES[chain];
+  if (!rules) return null;
+  return (<div className="chain-rules">
+    <strong>{chain}</strong>: {rules.notes}
+    {rules.payTerms && <span style={{marginLeft:8,opacity:.7}}>({rules.payTerms})</span>}
+  </div>);
+}
+
+// ====== STOCK LOCATION POPUP ======
+function StockPopup({product, products}) {
+  var p = products.find(function(pr) { return pr.style === product; });
+  if (!p) return <span style={{fontSize:10,color:"var(--t4)"}}>N/A</span>;
+  var total = p.stock || 0;
+  return (<div style={{position:"relative",display:"inline-block"}}>
+    <span className={"bd " + (total > 500 ? "bd-gn" : total > 100 ? "bd-yw" : "bd-rd")}>{total.toLocaleString()}</span>
+    <div style={{fontSize:10,color:"var(--t4)",marginTop:2}}>
+      B:{p.bodega||0} L:{p.leona||0} C:{p.cercu||0} Le:{p.lecum||0} Ch:{p.chinco||0}
+    </div>
+  </div>);
+}
+
+// ====== QUOTE PDF PREVIEW ======
+function QuotePdfPreview({quote, onClose}) {
+  var rules = CHAIN_RULES[quote.chain] || {};
+  var today = new Date().toLocaleDateString("es-MX", {day:"numeric",month:"long",year:"numeric"});
+  return (<div className="modal-ov" onClick={onClose}><div className="modal" onClick={function(e){e.stopPropagation()}} style={{maxWidth:700,maxHeight:"90vh"}}>
+    <div style={{display:"flex",justifyContent:"space-between",marginBottom:12}}>
+      <button className="btn btn-p" onClick={function(){window.print()}}>Imprimir / PDF</button>
+      <button className="btn btn-g" onClick={onClose}>Cerrar</button>
+    </div>
+    <div className="pdf-preview">
+      <div className="pdf-header">
+        <div><div className="pdf-logo">SAHIBA</div><div style={{fontSize:11,color:"#666",marginTop:2}}>Wholesale Fashion - Mexico</div></div>
+        <div className="pdf-info">
+          <div style={{fontSize:16,fontWeight:700,color:"#111"}}>COTIZACION {quote.id}</div>
+          <div>Fecha: {fmtD(quote.date)}</div>
+          <div>Vigencia: {fmtD(quote.validUntil)}</div>
+          <div>Vendedor: {quote.salesperson}</div>
+        </div>
+      </div>
+      <h2>Cliente</h2>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,fontSize:12}}>
+        <div><strong>Cadena:</strong> {quote.chain}</div>
+        <div><strong>Comprador:</strong> {quote.buyer}</div>
+        <div><strong>Condiciones:</strong> {rules.payTerms || "Acordar"}</div>
+      </div>
+      {rules.notes && <div className="pdf-chain-box"><strong>Requisitos {quote.chain}:</strong> {rules.notes}</div>}
+      <h2>Productos</h2>
+      <table><thead><tr><th>Estilo</th><th>Descripcion</th><th>Codigo Barras</th><th style={{textAlign:"right"}}>Cantidad</th><th style={{textAlign:"right"}}>Precio Unit.</th><th style={{textAlign:"right"}}>Subtotal</th></tr></thead>
+      <tbody>{quote.items.map(function(it,i) {
+        return <tr key={i}><td style={{fontWeight:600}}>#{it.style}</td><td>{it.name || it.style}</td><td style={{fontSize:10,color:"#999"}}>{it.barcode || "-"}</td><td style={{textAlign:"right"}}>{it.qty.toLocaleString()}</td><td style={{textAlign:"right"}}>{fmt(it.unitPrice)}</td><td style={{textAlign:"right",fontWeight:600}}>{fmt(it.qty * it.unitPrice)}</td></tr>;
+      })}</tbody></table>
+      {quote.discount > 0 && <div style={{textAlign:"right",fontSize:12,marginTop:8}}>Descuento: -{fmt(quote.discount)}</div>}
+      <div className="pdf-total">Total: {fmt(quote.total)}</div>
+      {quote.notes && <div style={{marginTop:12,fontSize:11,color:"#666"}}><strong>Notas:</strong> {quote.notes}</div>}
+      <div className="pdf-footer">SAHIBA - Wholesale Fashion Mexico | Esta cotizacion es valida hasta {fmtD(quote.validUntil)}</div>
+    </div>
+  </div></div>);
+}
+
+// ====== QUOTES MODULE (Full rebuild) ======
+function QuotesModule({user, lang, products}) {
+  var t = T[lang];
+  var [quotes, setQuotes] = useState(QUOTES_DB);
+  var [showBuilder, setShowBuilder] = useState(false);
+  var [showPdf, setShowPdf] = useState(null);
+  var [editQuote, setEditQuote] = useState(null);
+  var [showDetail, setShowDetail] = useState(null);
+
+  var qs = user.role === "admin" ? quotes : quotes.filter(function(q) { return q.salesperson === user.name; });
+  var [statusFilter, setStatusFilter] = useState("all");
+  var filtered = statusFilter === "all" ? qs : qs.filter(function(q) { return q.status === statusFilter; });
+
+  function updateStatus(qId, newStatus) {
+    setQuotes(function(prev) { return prev.map(function(q) {
+      if (q.id !== qId) return q;
+      var h = (q.history || []).concat([{date: new Date().toISOString().slice(0,10), action: newStatus, user: user.name, detail: "Status -> " + newStatus}]);
+      return Object.assign({}, q, {status: newStatus, history: h});
+    })});
+    QUOTES_DB = quotes;
+  }
+
+  function convertToOrder(q) {
+    var ordId = "ORD-" + String(ORDER_SEQ).padStart(3,"0");
+    ORDER_SEQ++;
+    var newOrd = {id:ordId, quoteId:q.id, chain:q.chain, buyer:q.buyer, items:q.items.map(function(it){return Object.assign({},it,{shipped:0,delivered:0})}), total:q.total, stage:"order_pending", salesperson:q.salesperson, date:new Date().toISOString().slice(0,10), notes:"Generado desde cotizacion " + q.id, reserved:false, history:[{date:new Date().toISOString().slice(0,10),action:"created",user:user.name,detail:"Pedido creado desde " + q.id}]};
+    ORDERS_DB.push(newOrd);
+    updateStatus(q.id, "converted");
+    alert("Pedido " + ordId + " creado desde " + q.id);
+  }
+
+  return (<div>
+    <div className="fb">
+      <button className="btn btn-p" onClick={function(){setEditQuote(null);setShowBuilder(true)}}>{t.newQuote}</button>
+      <select className="fs" value={statusFilter} onChange={function(e){setStatusFilter(e.target.value)}}>
+        <option value="all">Todos</option>
+        <option value="draft">Borrador</option>
+        <option value="sent">Enviada</option>
+        <option value="approved">Aprobada</option>
+        <option value="rejected">Rechazada</option>
+        <option value="converted">Convertida</option>
+      </select>
+      <span style={{fontSize:11,color:"var(--t4)",marginLeft:"auto"}}>{filtered.length} cotizaciones</span>
+    </div>
+
+    <div className="tw"><table className="dt"><thead><tr><th>ID</th><th>{t.chain}</th><th>{t.buyer}</th><th>Items</th><th>{t.total}</th><th>{t.status}</th><th>{t.date}</th><th>Vigencia</th><th>Acciones</th></tr></thead><tbody>
+    {filtered.map(function(q) {
+      var stCls = q.status==="approved"?"bd-gn":q.status==="sent"?"bd-bl":q.status==="converted"?"bd-cy":q.status==="rejected"?"bd-rd":"bd-yw";
+      return <tr key={q.id}>
+        <td style={{fontWeight:600,color:"var(--ac)",cursor:"pointer"}} onClick={function(){setShowDetail(q)}}>{q.id}</td>
+        <td>{q.chain}</td>
+        <td style={{fontSize:11}}>{q.buyer}</td>
+        <td style={{fontSize:11}}>{q.items.map(function(i){return "#"+i.style+" x"+i.qty}).join(", ")}</td>
+        <td style={{color:"var(--gn)",fontWeight:600}}>{fmt(q.total)}</td>
+        <td><span className={"bd "+stCls}>{q.status}</span></td>
+        <td>{fmtD(q.date)}</td>
+        <td style={{fontSize:11}}>{fmtD(q.validUntil)}</td>
+        <td style={{whiteSpace:"nowrap"}}>
+          <button className="btn btn-s btn-g" onClick={function(){setShowPdf(q)}} style={{marginRight:4}}>PDF</button>
+          {q.status==="draft"&&<button className="btn btn-s btn-p" onClick={function(){updateStatus(q.id,"sent")}} style={{marginRight:4}}>Enviar</button>}
+          {q.status==="sent"&&user.role==="admin"&&<button className="btn btn-s btn-gn" onClick={function(){updateStatus(q.id,"approved")}} style={{marginRight:4}}>Aprobar</button>}
+          {q.status==="approved"&&<button className="btn btn-s btn-p" onClick={function(){convertToOrder(q)}}>Crear Pedido</button>}
+        </td>
+      </tr>;
+    })}
+    </tbody></table></div>
+
+    {showBuilder && <QuoteBuilder products={products} user={user} lang={lang} editQuote={editQuote} onSave={function(q) {
+      if (editQuote) { setQuotes(function(prev){return prev.map(function(old){return old.id===q.id?q:old})}); }
+      else { QUOTES_DB.push(q); setQuotes([].concat(QUOTES_DB)); }
+      setShowBuilder(false);
+    }} onClose={function(){setShowBuilder(false)}} />}
+
+    {showPdf && <QuotePdfPreview quote={showPdf} onClose={function(){setShowPdf(null)}} />}
+
+    {showDetail && <div className="do" onClick={function(){setShowDetail(null)}}><div className="dp" onClick={function(e){e.stopPropagation()}}>
+      <button className="dp-x" onClick={function(){setShowDetail(null)}}>X</button>
+      <h2>{showDetail.id}</h2>
+      <div className="ds">{showDetail.chain} - {showDetail.buyer}</div>
+      <ChainRulesBanner chain={showDetail.chain} />
+      <div className="dps"><h3>Productos ({showDetail.items.length})</h3>
+        {showDetail.items.map(function(it,i){return <div key={i} className="df"><span className="dl">#{it.style} {it.name} x{it.qty}</span><span className="dv">{fmt(it.qty*it.unitPrice)}</span></div>})}
+        <div className="df" style={{fontWeight:700}}><span className="dl">Total</span><span className="dv" style={{color:"var(--gn)"}}>{fmt(showDetail.total)}</span></div>
+      </div>
+      {showDetail.notes && <div className="dps"><h3>Notas</h3><p style={{fontSize:12,color:"var(--t2)"}}>{showDetail.notes}</p></div>}
+      <div className="dps"><h3>Historial</h3>
+        <div className="st-timeline">{(showDetail.history||[]).map(function(h,i){
+          var dotColor = h.action==="approved"?"var(--gn)":h.action==="rejected"?"var(--rd)":h.action==="sent"?"var(--ac)":"var(--t3)";
+          return <div key={i} className="st-item"><div className="st-dot" style={{background:dotColor}}></div><span className="st-time">{h.date}</span><span className="st-text"><strong>{h.user}</strong> - {h.detail}</span></div>;
+        })}</div>
+      </div>
+    </div></div>}
+  </div>);
+}
+
+// ====== QUOTE BUILDER ======
+function QuoteBuilder({products, user, lang, editQuote, onSave, onClose}) {
+  var [chain, setChain] = useState(editQuote ? editQuote.chain : CHAINS[0].name);
+  var [search, setSearch] = useState("");
+  var [items, setItems] = useState(editQuote ? editQuote.items.map(function(it){return Object.assign({},it)}) : []);
+  var [discount, setDiscount] = useState(editQuote ? editQuote.discount || 0 : 0);
+  var [notes, setNotes] = useState(editQuote ? editQuote.notes || "" : "");
+  var [validDays, setValidDays] = useState(30);
+
+  var chainObj = CHAINS.find(function(c){return c.name===chain}) || CHAINS[0];
+
+  var searchResults = !search ? [] : products.filter(function(p) {
+    return p.style.toLowerCase().indexOf(search.toLowerCase()) >= 0 || p.name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+  }).slice(0, 15);
+
+  function addItem(p) {
+    if (items.find(function(it){return it.style===p.style})) return;
+    setItems(function(prev){return prev.concat([{style:p.style, name:p.name, qty:100, unitPrice:p.wholesale || p.price || 0, barcode:""}])});
+    setSearch("");
+  }
+
+  function updateItem(idx, field, value) {
+    setItems(function(prev){return prev.map(function(it,i){if(i!==idx)return it;var n=Object.assign({},it);n[field]=field==="qty"||field==="unitPrice"?Number(value)||0:value;return n})});
+  }
+
+  function removeItem(idx) {
+    setItems(function(prev){return prev.filter(function(_,i){return i!==idx})});
+  }
+
+  var subtotal = items.reduce(function(s,it){return s + it.qty * it.unitPrice}, 0);
+  var total = subtotal - (discount || 0);
+
+  function save() {
+    if (items.length === 0) { alert("Agrega al menos un producto"); return; }
+    var validDate = new Date();
+    validDate.setDate(validDate.getDate() + validDays);
+    var q = editQuote ? Object.assign({}, editQuote) : {};
+    q.id = q.id || "QT-" + String(QUOTE_SEQ).padStart(3,"0");
+    if (!editQuote) QUOTE_SEQ++;
+    q.chain = chain;
+    q.buyer = chainObj.buyer;
+    q.items = items;
+    q.subtotal = subtotal;
+    q.discount = discount;
+    q.total = total;
+    q.status = q.status || "draft";
+    q.salesperson = q.salesperson || user.name;
+    q.date = q.date || new Date().toISOString().slice(0,10);
+    q.validUntil = validDate.toISOString().slice(0,10);
+    q.notes = notes;
+    q.history = (q.history || []).concat([{date:new Date().toISOString().slice(0,10), action:editQuote?"edited":"created", user:user.name, detail:editQuote?"Cotizacion editada":"Cotizacion creada"}]);
+    onSave(q);
+  }
+
+  return (<div className="modal-ov" onClick={onClose}><div className="modal" onClick={function(e){e.stopPropagation()}} style={{maxWidth:900,maxHeight:"90vh"}}>
+    <h2>{editQuote ? "Editar Cotizacion" : "Nueva Cotizacion"}</h2>
+
+    <div className="fg-row" style={{marginBottom:14}}>
+      <div className="fg"><label>Cadena</label><select className="fi" value={chain} onChange={function(e){setChain(e.target.value)}}>{CHAINS.map(function(c){return <option key={c.id} value={c.name}>{c.name} - {c.buyer}</option>})}</select></div>
+      <div className="fg"><label>Vigencia (dias)</label><input className="fi" type="number" value={validDays} onChange={function(e){setValidDays(Number(e.target.value)||30)}} /></div>
+    </div>
+
+    <ChainRulesBanner chain={chain} />
+
+    <div className="qb-wrap">
+      <div className="qb-sidebar">
+        <div className="fg"><label>Buscar Producto</label><input className="fi" placeholder="Estilo o nombre..." value={search} onChange={function(e){setSearch(e.target.value)}} /></div>
+        <div className="qb-results">
+          {searchResults.map(function(p) {
+            var imgUrl = getStyleImg(p.style);
+            var already = items.find(function(it){return it.style===p.style});
+            return <div key={p.style} className="qb-prod" onClick={function(){if(!already)addItem(p)}} style={already?{opacity:.4,cursor:"default"}:{}}>
+              {imgUrl ? <img src={imgUrl} alt={p.style}/> : <div className="qp-ph">{p.style}</div>}
+              <div className="qp-info">
+                <div className="qp-name">#{p.style} {p.name}</div>
+                <div className="qp-meta">{p.category} | {p.wholesale>0?fmt(p.wholesale):fmt(p.price)}</div>
+                <div className="qp-stock">
+                  <span className={"bd " + (p.stock>500?"bd-gn":p.stock>100?"bd-yw":"bd-rd")} style={{fontSize:9}}>{(p.stock||0).toLocaleString()}</span>
+                  <span style={{fontSize:9,color:"var(--t4)",marginLeft:4}}>B:{p.bodega||0} L:{p.leona||0} C:{p.cercu||0}</span>
+                </div>
+              </div>
+              {!already && <button className="qp-add">+</button>}
+            </div>;
+          })}
+          {search && searchResults.length===0 && <div style={{padding:16,textAlign:"center",fontSize:11,color:"var(--t4)"}}>Sin resultados</div>}
+          {!search && <div style={{padding:16,textAlign:"center",fontSize:11,color:"var(--t4)"}}>Escribe para buscar productos en vivo</div>}
+        </div>
+      </div>
+
+      <div className="qb-main">
+        <h3 style={{fontSize:13,marginBottom:8}}>Articulos ({items.length})</h3>
+        {items.length === 0 ? <div className="empty"><div className="em-i">+</div><div className="em-t">Busca y agrega productos</div></div> :
+        <table className="li-table"><thead><tr><th></th><th>Estilo</th><th>Descripcion</th><th style={{textAlign:"right"}}>Cant.</th><th style={{textAlign:"right"}}>Precio</th><th style={{textAlign:"right"}}>Subtotal</th><th>Stock</th><th></th></tr></thead><tbody>
+        {items.map(function(it, idx) {
+          var imgUrl = getStyleImg(it.style);
+          var prod = products.find(function(p){return p.style===it.style});
+          return <tr key={idx}>
+            <td>{imgUrl ? <img className="li-img" src={imgUrl} alt={it.style}/> : <div className="qp-ph" style={{width:36,height:36}}>{it.style}</div>}</td>
+            <td style={{fontWeight:600,color:"var(--ac)"}}>#{it.style}</td>
+            <td style={{fontSize:11,maxWidth:130,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{it.name}</td>
+            <td><input type="number" value={it.qty} onChange={function(e){updateItem(idx,"qty",e.target.value)}} min="1"/></td>
+            <td><input type="number" value={it.unitPrice} onChange={function(e){updateItem(idx,"unitPrice",e.target.value)}} min="0" style={{width:85}} disabled={user.role!=="admin"}/></td>
+            <td style={{textAlign:"right",fontWeight:600,color:"var(--gn)"}}>{fmt(it.qty * it.unitPrice)}</td>
+            <td>{prod ? <StockPopup product={it.style} products={products}/> : <span style={{fontSize:10,color:"var(--t4)"}}>-</span>}</td>
+            <td><button className="li-rm" onClick={function(){removeItem(idx)}}>x</button></td>
+          </tr>;
+        })}
+        </tbody></table>}
+
+        <div className="qt-totals">
+          <div className="qt-row"><span>Subtotal ({items.length} items, {items.reduce(function(s,it){return s+it.qty},0).toLocaleString()} pzas)</span><span>{fmt(subtotal)}</span></div>
+          {user.role==="admin" && <div className="qt-row"><span>Descuento</span><input type="number" value={discount} onChange={function(e){setDiscount(Number(e.target.value)||0)}} style={{width:80,background:"var(--bg2)",border:"1px solid var(--bdr)",borderRadius:4,padding:"2px 6px",color:"var(--t1)",fontSize:12,textAlign:"right",fontFamily:"inherit"}}/></div>}
+          <div className="qt-row total"><span>TOTAL</span><span style={{color:"var(--gn)"}}>{fmt(total)}</span></div>
+        </div>
+
+        <div className="fg" style={{marginTop:12}}><label>Notas</label><textarea className="fi" value={notes} onChange={function(e){setNotes(e.target.value)}} rows="2"></textarea></div>
+
+        <div style={{display:"flex",gap:8,marginTop:14}}>
+          <button className="btn btn-p" onClick={save}>Guardar Cotizacion</button>
+          <button className="btn btn-g" onClick={onClose}>Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div></div>);
+}
+
+// ====== ORDERS PIPELINE ======
+function OrdersPipeline({user, nav, lang, products}) {
+  var t = T[lang];
+  var [orders, setOrders] = useState(ORDERS_DB);
+  var ords = user.role === "admin" ? orders : user.role === "warehouse" ? orders.filter(function(o){return ["approved","in_production","ready_to_ship","delivered"].indexOf(o.stage) >= 0}) : orders.filter(function(o){return o.salesperson === user.name});
+
+  function moveStage(ordId, newStage) {
+    setOrders(function(prev) { return prev.map(function(o) {
+      if (o.id !== ordId) return o;
+      var h = (o.history || []).concat([{date:new Date().toISOString().slice(0,10), action:newStage, user:user.name, detail:"Stage -> " + stageLabel(newStage, lang)}]);
+      var reserved = o.reserved;
+      if (newStage === "approved") reserved = true;
+      if (newStage === "delivered") reserved = false;
+      return Object.assign({}, o, {stage: newStage, history: h, reserved: reserved});
+    })});
+    ORDERS_DB = orders;
+  }
+
+  return (<div>
+    <div className="fb"><button className="btn btn-p">{t.newOrder}</button><span style={{fontSize:12,color:"var(--t4)"}}>{ords.length} {t.orders.toLowerCase()}</span></div>
+    <div className="pl">{STAGES.map(function(stage) {
+      var so = ords.filter(function(o){return o.stage === stage.key});
+      return (<div key={stage.key} className="pl-c">
+        <div className="pl-h"><h3 style={{color:stage.color}}>{stageLabel(stage.key,lang)}</h3><span className="pl-cnt">{so.length}</span></div>
+        <div className="pl-b">{so.map(function(o) {
+          var pctShipped = o.items.reduce(function(s,it){return s+it.qty},0) > 0 ? Math.round(o.items.reduce(function(s,it){return s+(it.shipped||0)},0) / o.items.reduce(function(s,it){return s+it.qty},0) * 100) : 0;
+          return <div key={o.id} className="pl-k" onClick={function(){nav("order-detail-full",o)}}>
+            <div className="kc">{o.chain} {o.quoteId ? "("+o.quoteId+")" : ""}</div>
+            <div className="kt">{o.id}</div>
+            <div className="km"><span className="ka">{fmt(o.total)}</span><span className="kd">{fmtD(o.date)}</span></div>
+            <div className="kp">{o.salesperson}</div>
+            {o.reserved && <span className="bd bd-yw" style={{fontSize:8,marginTop:4}}>RESERVADO</span>}
+            {pctShipped > 0 && pctShipped < 100 && <div style={{marginTop:4,height:3,background:"var(--bdr)",borderRadius:2}}><div style={{height:3,background:"var(--cy)",borderRadius:2,width:pctShipped+"%"}}></div></div>}
+          </div>;
+        })}
+        {so.length===0 && <div style={{padding:16,textAlign:"center",fontSize:11,color:"var(--t4)"}}>{t.noOrders}</div>}
+        </div>
+      </div>);
+    })}</div>
+  </div>);
+}
+
+// ====== ORDERS LIST ======
+function OrdersList({user, nav, lang, products}) {
+  var t = T[lang];
+  var [orders] = useState(ORDERS_DB);
+  var ords = user.role === "admin" ? orders : user.role === "warehouse" ? orders.filter(function(o){return ["approved","in_production","ready_to_ship","delivered"].indexOf(o.stage)>=0}) : orders.filter(function(o){return o.salesperson===user.name});
+  var [sf, setSf] = useState("all");
+  var [cf, setCf] = useState("all");
+  var filtered = ords.filter(function(o){return (sf==="all"||o.stage===sf) && (cf==="all"||o.chain===cf)});
+
+  return (<div>
+    <div className="fb">
+      <select className="fs" value={sf} onChange={function(e){setSf(e.target.value)}}><option value="all">{t.allStages}</option>{STAGES.map(function(s){return <option key={s.key} value={s.key}>{stageLabel(s.key,lang)}</option>})}</select>
+      <select className="fs" value={cf} onChange={function(e){setCf(e.target.value)}}><option value="all">{t.allChains}</option>{[].concat(Array.from(new Set(ords.map(function(o){return o.chain})))).map(function(c){return <option key={c} value={c}>{c}</option>})}</select>
+      <button className="btn btn-p">{t.newOrder}</button>
+    </div>
+    <div className="tw"><table className="dt"><thead><tr><th>{t.order}</th><th>Cot.</th><th>{t.chain}</th><th>Items</th><th>{t.total}</th><th>{t.rep}</th><th>{t.status}</th><th>Enviado</th><th>{t.date}</th></tr></thead><tbody>
+    {filtered.map(function(o) {
+      var totalQty = o.items.reduce(function(s,it){return s+it.qty},0);
+      var totalShipped = o.items.reduce(function(s,it){return s+(it.shipped||0)},0);
+      return <tr key={o.id} style={{cursor:"pointer"}} onClick={function(){nav("order-detail-full",o)}}>
+        <td style={{fontWeight:600,color:"var(--ac)"}}>{o.id}</td>
+        <td style={{fontSize:10,color:"var(--t4)"}}>{o.quoteId||"-"}</td>
+        <td>{o.chain}</td>
+        <td style={{fontSize:11}}>{o.items.map(function(i){return "#"+i.style+" x"+i.qty}).join(", ")}</td>
+        <td style={{color:"var(--gn)",fontWeight:600}}>{fmt(o.total)}</td>
+        <td>{o.salesperson}</td>
+        <td><SB stage={o.stage} lang={lang}/>{o.reserved&&<span className="bd bd-yw" style={{fontSize:8,marginLeft:4}}>R</span>}</td>
+        <td style={{fontSize:11}}>{totalShipped}/{totalQty}{totalShipped>0&&totalShipped<totalQty&&<span style={{color:"var(--or)",marginLeft:2}}>parcial</span>}</td>
+        <td>{fmtD(o.date)}</td>
+      </tr>;
+    })}
+    </tbody></table></div>
+  </div>);
+}
+
+// ====== ORDER DETAIL PANEL (Full) ======
+function OrderDetailFull({order, onClose, user, lang, products}) {
+  if (!order) return null;
+  var t = T[lang];
+  var totalQty = order.items.reduce(function(s,it){return s+it.qty},0);
+  var totalShipped = order.items.reduce(function(s,it){return s+(it.shipped||0)},0);
+  var totalDelivered = order.items.reduce(function(s,it){return s+(it.delivered||0)},0);
+
+  return (<div className="do" onClick={onClose}><div className="dp" onClick={function(e){e.stopPropagation()}} style={{width:580}}>
+    <button className="dp-x" onClick={onClose}>X</button>
+    <h2>{order.id}</h2>
+    <div className="ds">{order.chain} - {order.buyer} {order.quoteId ? " | Cot: "+order.quoteId : ""}</div>
+
+    <ChainRulesBanner chain={order.chain} />
+
+    <div className="dps"><h3>Estado del Pedido</h3>
+      <div className="df"><span className="dl">Estado</span><span className="dv"><SB stage={order.stage} lang={lang}/></span></div>
+      <div className="df"><span className="dl">Inventario</span><span className="dv">{order.reserved ? <span className="bd bd-yw">Reservado</span> : <span className="bd bd-bl">Sin reservar</span>}</span></div>
+      <div className="df"><span className="dl">Vendedora</span><span className="dv">{order.salesperson}</span></div>
+      <div className="df"><span className="dl">Fecha</span><span className="dv">{fmtD(order.date)}</span></div>
+      <div className="df"><span className="dl">Total</span><span className="dv" style={{color:"var(--gn)",fontWeight:700,fontSize:15}}>{fmt(order.total)}</span></div>
+    </div>
+
+    <div className="dps"><h3>Productos y Envio</h3>
+      <table className="li-table"><thead><tr><th>Estilo</th><th>Desc.</th><th style={{textAlign:"right"}}>Pedido</th><th style={{textAlign:"right"}}>Enviado</th><th style={{textAlign:"right"}}>Entregado</th></tr></thead><tbody>
+      {order.items.map(function(it,i) {
+        var pct = it.qty > 0 ? Math.round((it.shipped||0)/it.qty*100) : 0;
+        return <tr key={i}>
+          <td style={{fontWeight:600,color:"var(--ac)"}}>#{it.style}</td>
+          <td style={{fontSize:11}}>{it.name}</td>
+          <td style={{textAlign:"right"}}>{it.qty}</td>
+          <td style={{textAlign:"right"}}><span style={{color:pct>=100?"var(--gn)":pct>0?"var(--or)":"var(--t3)"}}>{it.shipped||0}</span></td>
+          <td style={{textAlign:"right"}}><span style={{color:(it.delivered||0)>=it.qty?"var(--gn)":"var(--t3)"}}>{it.delivered||0}</span></td>
+        </tr>;
+      })}
+      </tbody></table>
+      <div style={{marginTop:8}}>
+        <div style={{display:"flex",justifyContent:"space-between",fontSize:11,color:"var(--t3)",marginBottom:2}}>
+          <span>Enviado: {totalShipped}/{totalQty}</span>
+          <span>Entregado: {totalDelivered}/{totalQty}</span>
+        </div>
+        <div style={{height:6,background:"var(--bg)",borderRadius:3,overflow:"hidden"}}>
+          <div style={{height:6,borderRadius:3,background:totalDelivered>=totalQty?"var(--gn)":totalShipped>0?"var(--cy)":"var(--bdr)",width:Math.round(totalDelivered/Math.max(totalQty,1)*100)+"%",transition:"width .3s"}}></div>
+        </div>
+      </div>
+    </div>
+
+    {order.notes && <div className="dps"><h3>Notas</h3><p style={{fontSize:12,color:"var(--t2)"}}>{order.notes}</p></div>}
+
+    <div className="dps"><h3>Historial ({(order.history||[]).length})</h3>
+      <div className="st-timeline">{(order.history||[]).map(function(h,i) {
+        var dotColor = h.action==="approved"||h.action==="delivered"||h.action==="paid"?"var(--gn)":h.action==="dispatched"?"var(--cy)":h.action==="rejected"?"var(--rd)":"var(--ac)";
+        return <div key={i} className="st-item"><div className="st-dot" style={{background:dotColor}}></div><span className="st-time">{h.date}</span><span className="st-text"><strong>{h.user}</strong> - {h.detail}</span></div>;
+      })}</div>
+    </div>
+  </div></div>);
+}
+
+
+function TechDocs({lang,products}){const t=T[lang];const docTypes=[{key:"ficha_tecnica",label:t.fichaTecnica},{key:"composition",label:t.compositionSheet},{key:"care",label:t.careInstructions},{key:"barcode",label:t.barcodeSheet},{key:"label",label:t.labelCompliance},{key:"packing",label:t.packingList},{key:"price_sheet",label:t.priceSheet},{key:"vendor",label:t.vendorForms}];
+const[selP,setSelP]=useState("");const[selD,setSelD]=useState("ficha_tecnica");const[selC,setSelC]=useState(CHAINS[0].name);const[gen,setGen]=useState(false);const[generated,setGenerated]=useState([]);
+const doGen=()=>{setGen(true);setTimeout(()=>{setGen(false);setGenerated(prev=>[...prev,{product:selP||products[0]?.style,doc:selD,chain:selC,date:new Date().toISOString().slice(0,10)}])},1500)};
+return(<div><div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:20}}>
+<div className="set-card"><h3>{t.generateDoc}</h3>
+<div className="fg"><label>{t.selectProduct}</label><select className="fi" value={selP} onChange={e=>setSelP(e.target.value)}>{products.slice(0,100).map(p=><option key={p.style} value={p.style}>#{p.style} {p.name}</option>)}</select></div>
+<div className="fg"><label>{t.chain}</label><select className="fi" value={selC} onChange={e=>setSelC(e.target.value)}>{CHAINS.map(c=><option key={c.id} value={c.name}>{c.name}</option>)}</select></div>
+<div className="fg"><label>{t.docType}</label><select className="fi" value={selD} onChange={e=>setSelD(e.target.value)}>{docTypes.map(d=><option key={d.key} value={d.key}>{d.label}</option>)}</select></div>
+<button className="btn btn-p" onClick={doGen} disabled={gen} style={{width:"100%",justifyContent:"center",marginTop:8}}>{gen?t.generating:t.generatePdf}</button></div>
+<div><h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.generated} ({generated.length})</h3>
+{generated.length===0?<div className="empty"><div className="em-i">PDF</div><div className="em-t">No documents generated yet</div></div>:
+<div className="tw"><table className="dt"><thead><tr><th>{t.style}</th><th>{t.docType}</th><th>{t.chain}</th><th>{t.date}</th></tr></thead><tbody>
+{generated.map((g,i)=><tr key={i}><td style={{fontWeight:600}}>#{g.product}</td><td>{docTypes.find(d=>d.key===g.doc)?.label}</td><td>{g.chain}</td><td>{g.date}</td></tr>)}
+</tbody></table></div>}</div></div></div>);
+}
+
+function SamplesTracking({user,lang}){const t=T[lang];const samps=user.role==="admin"?SAMPLES:SAMPLES.filter(s=>s.salesperson===user.name);
+return(<div><div className="fb"><button className="btn btn-p">+ New Sample</button></div>
+<div className="tw"><table className="dt"><thead><tr><th>{t.sampleId}</th><th>{t.chain}</th><th>{t.itemsGiven}</th><th>{t.rep}</th><th>{t.dateGiven}</th><th>{t.responseDate}</th><th>{t.status}</th><th>{t.notes}</th></tr></thead><tbody>
+{samps.map(s=><tr key={s.id}><td style={{fontWeight:600}}>{s.id}</td><td>{s.chain}</td><td style={{fontSize:11}}>{s.items}</td><td>{s.salesperson}</td><td>{fmtD(s.dateGiven)}</td><td>{fmtD(s.responseDate)}</td>
+<td><span className={"bd "+(s.status==="overdue"?"bd-rd":"bd-yw")}>{s.status==="overdue"?t.overdue:t.pending}</span></td><td style={{fontSize:11,maxWidth:140,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{s.notes}</td></tr>)}
+</tbody></table></div></div>);
+}
+
+function DeliveryModule({lang}){const t=T[lang];return(<div>
+<div className="mg"><div className="mk"><div className="mk-l">{t.dispatched}</div><div className="mk-v">{DELIVERIES.length}</div></div><div className="mk"><div className="mk-l">{t.inTransit}</div><div className="mk-v" style={{color:"var(--or)"}}>{DELIVERIES.filter(d=>d.status!=="delivered").length}</div></div><div className="mk"><div className="mk-l">{t.delivered}</div><div className="mk-v" style={{color:"var(--gn)"}}>{DELIVERIES.filter(d=>d.status==="delivered").length}</div></div></div>
+<div className="tw"><table className="dt"><thead><tr><th>ID</th><th>{t.order}</th><th>{t.chain}</th><th>{t.dispatchDate}</th><th>{t.transporter}</th><th>{t.trackingNo}</th><th>{t.status}</th><th>{t.proofOfDelivery}</th></tr></thead><tbody>
+{DELIVERIES.map(d=><tr key={d.id}><td style={{fontWeight:600}}>{d.id}</td><td style={{color:"var(--ac)"}}>{d.orderId}</td><td>{d.chain}</td><td>{fmtD(d.dispatchDate)}</td><td>{d.transporter}</td><td style={{fontSize:11}}>{d.trackingNo}</td>
+<td><span className={"bd "+(d.status==="delivered"?"bd-gn":"bd-or")}>{d.status==="delivered"?t.delivered:t.inTransit}</span></td>
+<td>{d.proofUploaded?<span className="bd bd-gn">OK</span>:<button className="btn btn-s btn-g">{t.uploadFile}</button>}</td></tr>)}
+</tbody></table></div></div>);
+}
+
+function InvoicesModule({lang}){const t=T[lang];const sm={paid:{l:t.paidInv,c:"bd-gn"},sent:{l:t.sent,c:"bd-bl"},draft:{l:t.draft,c:"bd-yw"}};
+return(<div><div className="mg"><div className="mk"><div className="mk-l">{t.invoices}</div><div className="mk-v">{INVOICES.length}</div></div><div className="mk"><div className="mk-l">{t.paid}</div><div className="mk-v" style={{color:"var(--gn)"}}>{fmt(INVOICES.filter(i=>i.status==="paid").reduce((s,i)=>s+i.amount,0))}</div></div><div className="mk"><div className="mk-l">{t.pending}</div><div className="mk-v" style={{color:"var(--yw)"}}>{fmt(INVOICES.filter(i=>i.status!=="paid").reduce((s,i)=>s+i.amount,0))}</div></div></div>
+<div className="tw"><table className="dt"><thead><tr><th>{t.invoiceNo}</th><th>{t.order}</th><th>{t.chain}</th><th>{t.amount}</th><th>{t.dueDate}</th><th>{t.status}</th><th>{t.action}</th></tr></thead><tbody>
+{INVOICES.map(inv=><tr key={inv.id}><td style={{fontWeight:600,color:"var(--ac)"}}>{inv.id}</td><td>{inv.orderId}</td><td>{inv.chain}</td><td style={{fontWeight:600,color:"var(--gn)"}}>{fmt(inv.amount)}</td><td>{fmtD(inv.dueDate)}</td>
+<td><span className={"bd "+(sm[inv.status]?.c||"")}>{sm[inv.status]?.l||inv.status}</span></td><td><button className="btn btn-s btn-g">{t.generatePdf}</button></td></tr>)}
+</tbody></table></div></div>);
+}
+
+function DocsMedia({user,lang}){const t=T[lang];const docs2=user.role==="admin"?DOCS_MEDIA:DOCS_MEDIA.filter(d=>d.uploadedBy===user.name);const typeMap={meeting_notes:t.meetingNotes,signed_order:t.signedOrders,store_photos:t.storePhotos,req_files:t.reqFiles,delivery_proof:t.deliveryProof};
+const[showUp,setShowUp]=useState(false);
+return(<div><div className="fb"><button className="btn btn-p" onClick={()=>setShowUp(true)}>{t.uploadFile}</button></div>
+<div className="tw"><table className="dt"><thead><tr><th>ID</th><th>{t.type}</th><th>{t.chain}</th><th>{t.name}</th><th>{t.user}</th><th>{t.date}</th></tr></thead><tbody>
+{docs2.map(d=><tr key={d.id}><td style={{fontWeight:600}}>{d.id}</td><td><span className="bd bd-bl">{typeMap[d.type]||d.type}</span></td><td>{d.chain}</td><td style={{color:"var(--ac)"}}>{d.fileName}</td><td>{d.uploadedBy}</td><td>{fmtD(d.date)}</td></tr>)}
+</tbody></table></div>
+{showUp&&<div className="modal-ov" onClick={()=>setShowUp(false)}><div className="modal" onClick={e=>e.stopPropagation()}>
+<h2>{t.uploadFile}</h2>
+<div className="fg"><label>{t.uploadType}</label><select className="fi"><option>{t.meetingNotes}</option><option>{t.reqFiles}</option><option>{t.signedOrders}</option><option>{t.deliveryProof}</option><option>{t.storePhotos}</option></select></div>
+<div className="fg"><label>{t.chain}</label><select className="fi">{CHAINS.map(c=><option key={c.id}>{c.name}</option>)}</select></div>
+<div className="fg"><label>File</label><input className="fi" type="file"/></div>
+<div style={{display:"flex",gap:8,marginTop:16}}><button className="btn btn-p" onClick={()=>setShowUp(false)}>{t.save}</button><button className="btn btn-g" onClick={()=>setShowUp(false)}>{t.cancel}</button></div>
+</div></div>}</div>);
+}
+
+function NotifsModule({lang}){const t=T[lang];const[tab,setTab]=useState("all");const filtered=tab==="all"?NOTIFS:NOTIFS.filter(n=>n.status===tab);
+return(<div><div className="tabs"><div className={"tab"+(tab==="all"?" a":"")} onClick={()=>setTab("all")}>All</div><div className={"tab"+(tab==="pending"?" a":"")} onClick={()=>setTab("pending")}>{t.pending}</div><div className={"tab"+(tab==="scheduled"?" a":"")} onClick={()=>setTab("scheduled")}>{t.schedNotifs}</div><div className={"tab"+(tab==="sent"?" a":"")} onClick={()=>setTab("sent")}>{t.sentNotifs}</div></div>
+<div className="tw"><table className="dt"><thead><tr><th>{t.channel}</th><th>{t.type}</th><th>{t.message}</th><th>{t.rep}</th><th>{t.scheduledFor}</th><th>{t.status}</th></tr></thead><tbody>
+{filtered.map(n=><tr key={n.id}><td><span className={"bd "+(n.channel==="whatsapp"?"bd-gn":"bd-bl")}>{n.channel}</span></td><td style={{fontSize:11}}>{n.type}</td><td style={{fontSize:11,maxWidth:220}}>{n.message}</td><td>{n.recipient}</td><td style={{fontSize:11}}>{n.scheduledFor}</td><td><span className={"bd "+(n.status==="sent"?"bd-gn":n.status==="pending"?"bd-yw":"bd-bl")}>{n.status}</span></td></tr>)}
+</tbody></table></div></div>);
+}
+
+function ReportsModule({lang,products}){const t=T[lang];const[tab,setTab]=useState("overview");const totalRev=ORDERS_DB.reduce((s,o)=>s+o.total,0);const avgOV=Math.round(totalRev/ORDERS_DB.length);
+const months=["Ene","Feb","Mar","Abr"];const monthVals=[180000,255000,336000,510000];const maxVal=Math.max(...monthVals);
+return(<div><div className="tabs"><div className={"tab"+(tab==="overview"?" a":"")} onClick={()=>setTab("overview")}>{t.overview}</div><div className={"tab"+(tab==="chain"?" a":"")} onClick={()=>setTab("chain")}>{t.byChain}</div><div className={"tab"+(tab==="rep"?" a":"")} onClick={()=>setTab("rep")}>{t.byRep}</div></div>
+{tab==="overview"&&<div><div className="mg"><div className="mk"><div className="mk-l">{t.totalRevenue}</div><div className="mk-v" style={{color:"var(--gn)"}}>{fmt(totalRev)}</div></div><div className="mk"><div className="mk-l">{t.avgOrderValue}</div><div className="mk-v">{fmt(avgOV)}</div></div><div className="mk"><div className="mk-l">{t.liveProducts}</div><div className="mk-v">{products.length}</div></div><div className="mk"><div className="mk-l">{t.conversionRate}</div><div className="mk-v" style={{color:"var(--ac)"}}>{Math.round(ORDERS_DB.filter(o=>["paid","delivered"].includes(o.stage)).length/ORDERS_DB.length*100)}%</div></div></div>
+<h3 style={{fontSize:13,marginBottom:10,color:"var(--t2)"}}>{t.monthlySales}</h3>
+<div className="chart-ph"><div className="bar-chart">{months.map((m,i)=><div key={m} className="bar" style={{height:Math.round(monthVals[i]/maxVal*140)+"px",background:i===3?"var(--ac)":"var(--bdr2)",width:50}}><span className="bar-val">{fmt(monthVals[i])}</span><span className="bar-label">{m}</span></div>)}</div></div></div>}
+{tab==="chain"&&<div className="tw"><table className="dt"><thead><tr><th>{t.chain}</th><th>{t.orders}</th><th>{t.total}</th><th>{t.delivered}</th><th>{t.paid}</th></tr></thead><tbody>
+{CHAINS.map(c=>{const co=ORDERS_DB.filter(o=>o.chain===c.name);const rev=co.reduce((s,o)=>s+o.total,0);return <tr key={c.id}><td style={{fontWeight:600}}>{c.name}</td><td>{co.length}</td><td style={{color:"var(--gn)"}}>{fmt(rev)}</td><td>{co.filter(o=>o.stage==="delivered").length}</td><td>{co.filter(o=>o.stage==="paid").length}</td></tr>})}
+</tbody></table></div>}
+{tab==="rep"&&<div className="tw"><table className="dt"><thead><tr><th>{t.rep}</th><th>{t.orders}</th><th>{t.total}</th></tr></thead><tbody>
+{["Ingrid","Cynthia","Sonia"].map(nm=>{const ords=ORDERS_DB.filter(o=>o.salesperson===nm);const rev=ords.reduce((s,o)=>s+o.total,0);return <tr key={nm}><td style={{fontWeight:600}}>{nm}</td><td>{ords.length}</td><td style={{color:"var(--gn)"}}>{fmt(rev)}</td></tr>})}
+</tbody></table></div>}
+</div>);
+}
+
+function SettingsModule({lang}){const t=T[lang];const[tab,setTab]=useState("general");
+return(<div><div className="tabs"><div className={"tab"+(tab==="general"?" a":"")} onClick={()=>setTab("general")}>{t.generalSettings}</div><div className={"tab"+(tab==="users"?" a":"")} onClick={()=>setTab("users")}>{t.userMgmt}</div><div className={"tab"+(tab==="templates"?" a":"")} onClick={()=>setTab("templates")}>{t.chainTemplates}</div><div className={"tab"+(tab==="pricing"?" a":"")} onClick={()=>setTab("pricing")}>{t.pricingControl}</div><div className={"tab"+(tab==="audit"?" a":"")} onClick={()=>setTab("audit")}>{t.auditLog}</div></div>
+{tab==="general"&&<div>
+<div className="set-card"><h3>API / Data Connections</h3>
+<div className="set-row"><span className="sr-l">SQL Server (ngrok)</span><span className="bd bd-gn">Connected</span></div>
+<div className="set-row"><span className="sr-l">Google Drive Images</span><span className={"bd "+(GDRIVE_LOADED?"bd-gn":"bd-yw")}>{GDRIVE_LOADED?"Connected":"Loading..."}</span></div>
+<div className="set-row"><span className="sr-l">Netlify Proxy</span><span className="bd bd-gn">Configured</span></div></div>
+<div className="set-card"><h3>{t.notifSettings}</h3>
+<div className="set-row"><span className="sr-l">{t.whatsapp}</span><div className="toggle on" onClick={e=>e.currentTarget.classList.toggle("on")}></div></div>
+<div className="set-row"><span className="sr-l">{t.email}</span><div className="toggle on" onClick={e=>e.currentTarget.classList.toggle("on")}></div></div></div></div>}
+{tab==="users"&&<div className="tw"><table className="dt"><thead><tr><th>{t.name}</th><th>Role</th><th>{t.status}</th><th>{t.action}</th></tr></thead><tbody>
+{USERS.map(u=><tr key={u.name}><td style={{fontWeight:600}}>{u.name}</td><td><span className={"bd "+(u.role==="admin"?"bd-pk":u.role==="salesperson"?"bd-bl":"bd-or")}>{u.role}</span></td><td><span className="bd bd-gn">{t.active}</span></td><td><button className="btn btn-s btn-g">Edit</button></td></tr>)}
+</tbody></table></div>}
+{tab==="templates"&&<div>{CHAINS.map(c=><div key={c.id} className="set-card"><h3>{c.name}</h3>
+<div className="set-row"><span className="sr-l">Ficha Tecnica</span><span className="bd bd-gn">Uploaded</span></div>
+<div className="set-row"><span className="sr-l">Packing List</span><span className="bd bd-yw">{t.pending}</span></div>
+<div className="set-row"><span className="sr-l">{t.deliveryRules}</span><span style={{fontSize:11,color:"var(--t2)",maxWidth:250,textAlign:"right"}}>{c.deliveryRules}</span></div></div>)}</div>}
+{tab==="pricing"&&<div><div className="set-card"><h3>{t.pricingControl}</h3><p style={{fontSize:12,color:"var(--t3)",marginBottom:8}}>Only admin can modify pricing</p></div></div>}
+{tab==="audit"&&<div className="tw" style={{padding:16}}>{AUDIT_LOG.map((log,i)=><div key={i} className="log-item"><span className="log-time">{log.time}</span><span className="log-user">{log.user}</span><span className="log-action">{log.action} - {log.detail}</span></div>)}</div>}
+</div>);
+}
+
+// ====== MAIN APP ======
+function App(){
+const[user,setUser]=useState(null);const[page,setPage]=useState("dashboard");const[lang,setLang]=useState("es");const[sbOpen,setSbOpen]=useState(false);
+const[detailType,setDetailType]=useState(null);const[detailData,setDetailData]=useState(null);
+const{products,loading,apiStatus,imgReady}=useProducts();
+
+const nav=useCallback((target,data)=>{
+if(target==="order-detail"){setDetailType("order");setDetailData(data)}
+else if(target==="order-detail-full"){setDetailType("order-full");setDetailData(data)}
+else if(target==="account-detail"){setDetailType("account");setDetailData(data)}
+else if(target==="product-detail"){setDetailType("product");setDetailData(data)}
+else{setPage(target);setSbOpen(false)}
+},[]);
+
+const t=T[lang];if(!user)return <PinLogin onLogin={setUser}/>;
+const isAdmin=user.role==="admin",isWh=user.role==="warehouse";
+
+const navSections=isWh?[
+{section:t.main,items:[{key:"dashboard",icon:"\u{1F4CA}",label:t.dashboard}]},
+{section:t.operations,items:[{key:"orders",icon:"\u{1F4E6}",label:t.orders},{key:"inventory",icon:"\u{1F4E5}",label:t.inventory},{key:"delivery",icon:"\u{1F69A}",label:t.delivery}]}
+]:isAdmin?[
+{section:t.main,items:[{key:"dashboard",icon:"\u{1F4CA}",label:t.dashboard}]},
+{section:t.sales,items:[{key:"accounts",icon:"\u{1F3EA}",label:t.accounts},{key:"catalog",icon:"\u{1F457}",label:t.catalog},{key:"pipeline",icon:"\u{1F4CB}",label:t.pipeline},{key:"orders",icon:"\u{1F4E6}",label:t.orders},{key:"quotes",icon:"\u{1F4B0}",label:t.quotes},{key:"tech_docs",icon:"\u{1F4C4}",label:t.techDocs},{key:"samples",icon:"\u{1F381}",label:t.samples}]},
+{section:t.operations,items:[{key:"inventory",icon:"\u{1F4E5}",label:t.inventory},{key:"delivery",icon:"\u{1F69A}",label:t.delivery},{key:"invoices",icon:"\u{1F9FE}",label:t.invoices}]},
+{section:t.system,items:[{key:"docs_media",icon:"\u{1F4CE}",label:t.docs},{key:"notifs",icon:"\u{1F514}",label:t.notifs,badge:NOTIFS.filter(n=>n.status==="pending").length},{key:"reports",icon:"\u{1F4C8}",label:t.reports},{key:"settings",icon:"\u2699\uFE0F",label:t.settings}]}
+]:[
+{section:t.main,items:[{key:"dashboard",icon:"\u{1F4CA}",label:t.myDashboard}]},
+{section:t.sales,items:[{key:"accounts",icon:"\u{1F3EA}",label:t.myAccounts},{key:"catalog",icon:"\u{1F457}",label:t.catalog},{key:"pipeline",icon:"\u{1F4CB}",label:t.pipeline},{key:"orders",icon:"\u{1F4E6}",label:t.myOrders},{key:"quotes",icon:"\u{1F4B0}",label:t.quotes},{key:"tech_docs",icon:"\u{1F4C4}",label:t.techDocs},{key:"samples",icon:"\u{1F381}",label:t.samples}]},
+{section:t.operations,items:[{key:"delivery",icon:"\u{1F69A}",label:t.delivery},{key:"docs_media",icon:"\u{1F4CE}",label:t.docs}]}
+];
+const pageTitle={dashboard:isAdmin?t.dashboard:isWh?t.dashboard:t.myDashboard,accounts:t.accounts,catalog:t.catalog,pipeline:t.pipeline,orders:t.orders,quotes:t.quotes,tech_docs:t.techDocs,samples:t.samples,inventory:t.inventory,delivery:t.delivery,invoices:t.invoices,docs_media:t.docs,notifs:t.notifs,reports:t.reports,settings:t.settings};
+
+return(<div className="al">
+{sbOpen&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.5)",zIndex:99}} onClick={()=>setSbOpen(false)}/>}
+<aside className={"sb"+(sbOpen?" open":"")}>
+<div className="sb-h"><h1>SAHIBA</h1><p>Chain Store CRM</p></div>
+<nav className="sb-n">{navSections.map(sec=><div key={sec.section} className="ns"><div className="nl">{sec.section}</div>
+{sec.items.map(item=><div key={item.key} className={"ni"+(page===item.key?" a":"")} onClick={()=>nav(item.key)}><span className="ic">{item.icon}</span>{item.label}{item.badge>0&&<span className="nb">{item.badge}</span>}</div>)}</div>)}</nav>
+<div className="sb-f">
+<div className="api-status" style={{marginBottom:8,paddingLeft:8}}><div className={"api-dot "+(apiStatus==="connected"?"on":apiStatus==="loading"?"loading":"off")}></div><span style={{fontSize:10}}>{apiStatus==="connected"?"SQL Live":"API "+apiStatus}</span>
+{GDRIVE_LOADED&&<><div className="api-dot on" style={{marginLeft:8}}></div><span style={{fontSize:10}}>IMG</span></>}</div>
+<div className="up" onClick={()=>{setUser(null);setPage("dashboard")}}><div className="ua">{user.initials}</div><div className="ui"><div className="un">{user.name}</div><div className="ur">{user.role}</div></div><span style={{fontSize:11,color:"var(--t4)",marginLeft:"auto"}}>{t.logout}</span></div>
+</div></aside>
+
+<div className="mc"><div className="tb"><div style={{display:"flex",alignItems:"center",gap:10}}><button className="hb" onClick={()=>setSbOpen(!sbOpen)}>{"\u2630"}</button><span className="tb-t">{pageTitle[page]||page}</span></div>
+<div className="tb-a"><select className="lang-sw" value={lang} onChange={e=>setLang(e.target.value)}><option value="es">ES</option><option value="en">EN</option></select></div></div>
+<div className="pc">
+{page==="dashboard"&&(isWh?<WarehouseDash nav={nav} lang={lang}/>:isAdmin?<AdminDash nav={nav} lang={lang} products={products}/>:<SalesDash user={user} nav={nav} lang={lang}/>)}
+{page==="accounts"&&<AccountsCRM user={user} nav={nav} lang={lang}/>}
+{page==="catalog"&&<ProductCatalog products={products} loading={loading} apiStatus={apiStatus} nav={nav} lang={lang}/>}
+{page==="pipeline"&&<OrdersPipeline user={user} nav={nav} lang={lang} products={products}/>}
+{page==="orders"&&<OrdersList user={user} nav={nav} lang={lang} products={products}/>}
+{page==="quotes"&&<QuotesModule user={user} lang={lang} products={products}/>}
+{page==="tech_docs"&&<TechDocs lang={lang} products={products}/>}
+{page==="samples"&&<SamplesTracking user={user} lang={lang}/>}
+{page==="inventory"&&<InventoryModule products={products} loading={loading} nav={nav} lang={lang}/>}
+{page==="delivery"&&<DeliveryModule lang={lang}/>}
+{page==="invoices"&&<InvoicesModule lang={lang}/>}
+{page==="docs_media"&&<DocsMedia user={user} lang={lang}/>}
+{page==="notifs"&&<NotifsModule lang={lang}/>}
+{page==="reports"&&<ReportsModule lang={lang} products={products}/>}
+{page==="settings"&&<SettingsModule lang={lang}/>}
+</div></div>
+{detailData&&detailType!=="order-full"&&<DetailPanel type={detailType} data={detailData} onClose={()=>{setDetailType(null);setDetailData(null)}} lang={lang}/>}
+{detailData&&detailType==="order-full"&&<OrderDetailFull order={detailData} onClose={()=>{setDetailType(null);setDetailData(null)}} user={user} lang={lang} products={products}/>}
+</div>);
+}
+ReactDOM.render(<App/>,document.getElementById("root"));
+</script>
+</body>
+</html>
