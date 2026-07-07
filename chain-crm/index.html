@@ -11,31 +11,31 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#06090F;--bg2:#0C1220;--bg3:#121B2E;--bg4:#182440;--bg5:#1E2D4D;
---bdr:#1C2A45;--bdr2:#253555;
---t1:#F0F2F8;--t2:#A0AABE;--t3:#6B7A94;--t4:#4A5A74;
---ac:#4F8EF7;--ac2:#6BA1FF;--acd:rgba(79,142,247,.1);
---gn:#22C55E;--gnd:rgba(34,197,94,.1);
---yw:#EAB308;--ywd:rgba(234,179,8,.1);
---rd:#EF4444;--rdd:rgba(239,68,68,.1);
---pk:#EC4899;--pkd:rgba(236,72,153,.1);
---cy:#06B6D4;--cyd:rgba(6,182,212,.1);
---or:#F97316;--ord:rgba(249,115,22,.1);
+--bg:#F1F4F9;--bg2:#FFFFFF;--bg3:#E9EDF5;--bg4:#DDE4F0;--bg5:#CFD9EA;
+--bdr:#C9D2E0;--bdr2:#AFBCD0;
+--t1:#10192B;--t2:#2E3B52;--t3:#4D5D78;--t4:#6E7E96;
+--ac:#1D4ED8;--ac2:#1E40AF;--acd:rgba(29,78,216,.08);
+--gn:#0E7A38;--gnd:rgba(14,122,56,.1);
+--yw:#9A5B00;--ywd:rgba(154,91,0,.12);
+--rd:#C81E1E;--rdd:rgba(200,30,30,.09);
+--pk:#BE185D;--pkd:rgba(190,24,93,.09);
+--cy:#0E7490;--cyd:rgba(14,116,144,.09);
+--or:#C2540A;--ord:rgba(194,84,10,.1);
 --r1:8px;--r2:12px;--r3:16px;--r4:20px;
---sh:0 4px 16px rgba(0,0,0,.4);
+--sh:0 4px 14px rgba(23,37,64,.10);
 }
 body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
 input,select,textarea,button{font-family:inherit}
 a{color:var(--ac);text-decoration:none}
 
-.lw{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse at 30% 20%,#0F1A30 0%,var(--bg) 70%)}
+.lw{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse at 30% 20%,#DCE6F7 0%,var(--bg) 70%)}
 .lb{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r4);padding:44px 36px;width:360px;max-width:92vw;text-align:center;box-shadow:var(--sh)}
 .ll{font-family:"Instrument Serif",serif;font-size:36px;color:var(--ac);letter-spacing:1px;margin-bottom:2px}
 .ls{font-size:11px;color:var(--t4);text-transform:uppercase;letter-spacing:3px;margin-bottom:32px}
 .pd{display:flex;justify-content:center;gap:14px;margin-bottom:28px}
 .pdd{width:13px;height:13px;border-radius:50%;border:2px solid var(--bdr);transition:.2s}
-.pdd.f{background:var(--ac);border-color:var(--ac);box-shadow:0 0 10px rgba(79,142,247,.4)}
+.pdd.f{background:var(--ac);border-color:var(--ac);box-shadow:0 0 10px rgba(29,78,216,.35)}
 .pdd.e{border-color:var(--rd);background:var(--rd)}
 .pp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:240px;margin:0 auto}
 .ppb{background:var(--bg3);border:1px solid var(--bdr);border-radius:var(--r2);color:var(--t1);font-size:20px;font-weight:600;padding:14px;cursor:pointer;transition:.15s;font-family:inherit}
@@ -137,7 +137,7 @@ a{color:var(--ac);text-decoration:none}
 .akd .asl{font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px}
 .akd .asv{font-size:14px;font-weight:700;margin-top:1px}
 
-.do{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:flex;justify-content:flex-end;animation:fadeIn .2s}
+.do{position:fixed;inset:0;background:rgba(16,25,43,.45);z-index:200;display:flex;justify-content:flex-end;animation:fadeIn .2s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .dp{width:520px;max-width:95vw;background:var(--bg2);border-left:1px solid var(--bdr);height:100vh;overflow-y:auto;padding:24px;animation:slideR .25s ease}
 @keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
@@ -160,7 +160,7 @@ a{color:var(--ac);text-decoration:none}
 .tabs{display:flex;gap:0;border-bottom:1px solid var(--bdr);margin-bottom:18px}
 .tab{padding:8px 16px;font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;transition:.15s}
 .tab:hover{color:var(--t1)}.tab.a{color:var(--ac);border-bottom-color:var(--ac)}
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:flex;align-items:center;justify-content:center;animation:fadeIn .15s}
+.modal-ov{position:fixed;inset:0;background:rgba(16,25,43,.5);z-index:300;display:flex;align-items:center;justify-content:center;animation:fadeIn .15s}
 .modal{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r3);width:520px;max-width:92vw;max-height:85vh;overflow-y:auto;padding:28px;box-shadow:var(--sh)}
 .modal h2{font-family:"Instrument Serif",serif;font-size:22px;font-weight:400;margin-bottom:16px}
 .fg{margin-bottom:14px}
@@ -249,7 +249,7 @@ textarea.fi{min-height:70px;resize:vertical}
 .qt-row.total{font-size:15px;font-weight:700;border-top:1px solid var(--bdr);padding-top:8px;margin-top:4px}
 
 /* Chain rules banner */
-.chain-rules{background:var(--acd);border:1px solid rgba(79,142,247,.2);border-radius:var(--r1);padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--ac2)}
+.chain-rules{background:var(--acd);border:1px solid rgba(29,78,216,.3);border-radius:var(--r1);padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--ac2)}
 .chain-rules strong{color:var(--ac)}
 
 /* Status timeline */
@@ -294,6 +294,19 @@ textarea.fi{min-height:70px;resize:vertical}
 <!-- Google Drive Image Loader - runs before React -->
 <script>
 var GDRIVE_IMG_MAP = {};
+
+// ====== LOCAL DOCUMENT STORAGE (IndexedDB - persists across reloads on this device) ======
+function idbOpenDocs(cb){
+  try{
+    var req=indexedDB.open("sahiba_chain_docs",1);
+    req.onupgradeneeded=function(e){var db=e.target.result;if(!db.objectStoreNames.contains("docs")){db.createObjectStore("docs",{keyPath:"id"});}};
+    req.onsuccess=function(e){cb(e.target.result)};
+    req.onerror=function(){cb(null)};
+  }catch(err){cb(null);}
+}
+function idbSaveDoc(doc,cb){idbOpenDocs(function(db){if(!db){cb(false);return;}var tx=db.transaction("docs","readwrite");tx.objectStore("docs").put(doc);tx.oncomplete=function(){cb(true)};tx.onerror=function(){cb(false)};});}
+function idbAllDocs(cb){idbOpenDocs(function(db){if(!db){cb([]);return;}var tx=db.transaction("docs","readonly");var rq=tx.objectStore("docs").getAll();rq.onsuccess=function(){cb(rq.result||[])};rq.onerror=function(){cb([])};});}
+function idbDeleteDoc(id,cb){idbOpenDocs(function(db){if(!db){cb(false);return;}var tx=db.transaction("docs","readwrite");tx.objectStore("docs").delete(id);tx.oncomplete=function(){cb(true)};tx.onerror=function(){cb(false)};});}
 var GDRIVE_LOADED = false;
 var GDRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxetLjQ0z9uWLoOxevDn7cvOraKEY81i7L-TfrS9A7hy140SdlAY1ikWvKrI6U49wMk/exec";
 
@@ -576,7 +589,8 @@ logout:"Sign Out",vsLastMonth:"vs last month",noOrders:"No orders",lowStockAlert
 liveProducts:"Live Products",loadingData:"Loading live data...",apiConnected:"SQL API Connected",apiOffline:"API Offline - Using Cache",
 imagesLoaded:"Images Loaded",overview:"Overview",byChain:"By Chain",byRep:"By Rep",
 reserved2:"Reserved",movementLog:"Movement Log",stockAlerts:"Stock Alerts",
-schedNotifs:"Scheduled",sentNotifs:"Sent",bodega:"Bodega",cost:"Cost"
+schedNotifs:"Scheduled",sentNotifs:"Sent",bodega:"Bodega",cost:"Cost",
+supplierNo:"Supplier No.",catalogs:"Catalogs",view:"View",selectFileFirst:"Select a file first",fileTooBig:"File too large (max 15 MB)"
 },
 es:{
 dashboard:"Dashboard",myDashboard:"Mi Dashboard",accounts:"Cuentas Cadena",catalog:"Catalogo",pipeline:"Pipeline",orders:"Pedidos",
@@ -621,7 +635,8 @@ logout:"Cerrar Sesion",vsLastMonth:"vs mes anterior",noOrders:"Sin pedidos",lowS
 liveProducts:"Productos en Vivo",loadingData:"Cargando datos en vivo...",apiConnected:"SQL API Conectado",apiOffline:"API Sin Conexion",
 imagesLoaded:"Imagenes Cargadas",overview:"General",byChain:"Por Cadena",byRep:"Por Vendedora",
 reserved2:"Reservado",movementLog:"Movimientos",stockAlerts:"Alertas Stock",
-schedNotifs:"Programadas",sentNotifs:"Enviadas",bodega:"Bodega",cost:"Costo"
+schedNotifs:"Programadas",sentNotifs:"Enviadas",bodega:"Bodega",cost:"Costo",
+supplierNo:"No. de Proveedor",catalogs:"Catalogos",view:"Ver",selectFileFirst:"Selecciona un archivo",fileTooBig:"Archivo muy grande (max 15 MB)"
 }
 };
 
@@ -635,7 +650,7 @@ const USERS=[
 ];
 const CHAINS=[
 {id:"CH001",name:"Soriana",hq:"Monterrey, NL",buyer:"Lic. Roberto Mendez",phone:"+52 81 1234 5678",paymentTerms:"Net 60",deliveryRules:"Must include barcode sheet + ficha tecnica",branches:142,status:"active",assigned:"Ingrid"},
-{id:"CH002",name:"Comercial Mexicana",hq:"CDMX",buyer:"Ing. Patricia Olvera",phone:"+52 55 9876 5432",paymentTerms:"Net 45",deliveryRules:"Require composition sheet per style",branches:87,status:"active",assigned:"Cynthia"},
+{id:"CH002",name:"Comercial Mexicana",hq:"CDMX",buyer:"Ing. Patricia Olvera",phone:"+52 55 9876 5432",supplierNo:"156403",paymentTerms:"Net 45",deliveryRules:"Require composition sheet per style",branches:87,status:"active",assigned:"Cynthia"},
 {id:"CH003",name:"Chedraui",hq:"Xalapa, VER",buyer:"Lic. Ana Torres",phone:"+52 22 5555 1234",paymentTerms:"Net 30",deliveryRules:"Packing list required, max 50 units per box",branches:310,status:"prospect",assigned:"Sonia"},
 {id:"CH004",name:"Shasa",hq:"CDMX",buyer:"Dulce Arteaga",phone:"+52 744 148 5467",paymentTerms:"Net 90",deliveryRules:"Label compliance mandatory, hangtags required",branches:130,status:"prospect",assigned:"Ingrid"},
 {id:"CH005",name:"Turistore",hq:"CDMX",buyer:"Vicky Bonilla",phone:"+52 55 3707 8935",paymentTerms:"Net 45",deliveryRules:"Ficha tecnica y lista de empaque requeridos",branches:85,status:"prospect",assigned:"Sonia"}
@@ -816,6 +831,7 @@ return(<div className="do" onClick={onClose}><div className="dp" onClick={e=>e.s
 <div className="df"><span className="dl">{t.phone}</span><span className="dv">{data.phone}</span></div></div>
 <div className="dps"><h3>{t.commercialTerms}</h3>
 <div className="df"><span className="dl">{t.payment}</span><span className="dv">{data.paymentTerms}</span></div>
+{data.supplierNo&&<div className="df"><span className="dl">{t.supplierNo}</span><span className="dv" style={{color:"var(--ac)",fontWeight:700}}>{data.supplierNo}</span></div>}
 <div className="df"><span className="dl">{t.branches}</span><span className="dv">{data.branches}</span></div>
 <div className="df"><span className="dl">{t.assigned}</span><span className="dv">{data.assigned}</span></div></div>
 <div className="dps"><h3>{t.deliveryRules}</h3><p style={{fontSize:12,color:"var(--t2)"}}>{data.deliveryRules}</p></div>
@@ -961,13 +977,14 @@ return(<div><div className="mg"><div className="mk"><div className="mk-l">{t.app
 
 function AccountsCRM({user,nav,lang}){const t=T[lang];const[chains2,setChains2]=useState(CHAINS);const accs=user.role==="admin"?chains2:chains2.filter(c=>c.assigned===user.name);const[search,setSearch]=useState("");
 const[showNew,setShowNew]=useState(false);
-const[nf,setNf]=useState({name:"",hq:"",buyer:"",phone:"",paymentTerms:"Net 30",deliveryRules:"",branches:"",status:"prospect",assigned:user.name});
-function saveAccount(){if(!nf.name||!nf.buyer){alert("Nombre de cadena y comprador son obligatorios");return;}var newCh={id:"CH"+String(chains2.length+1).padStart(3,"0"),name:nf.name,hq:nf.hq,buyer:nf.buyer,phone:nf.phone,paymentTerms:nf.paymentTerms,deliveryRules:nf.deliveryRules,branches:Number(nf.branches)||0,status:nf.status,assigned:nf.assigned};CHAINS.push(newCh);setChains2([].concat(CHAINS));setShowNew(false);setNf({name:"",hq:"",buyer:"",phone:"",paymentTerms:"Net 30",deliveryRules:"",branches:"",status:"prospect",assigned:user.name});}
+const[nf,setNf]=useState({name:"",hq:"",buyer:"",phone:"",supplierNo:"",paymentTerms:"Net 30",deliveryRules:"",branches:"",status:"prospect",assigned:user.name});
+function saveAccount(){if(!nf.name||!nf.buyer){alert("Nombre de cadena y comprador son obligatorios");return;}var newCh={id:"CH"+String(chains2.length+1).padStart(3,"0"),name:nf.name,hq:nf.hq,buyer:nf.buyer,phone:nf.phone,supplierNo:nf.supplierNo,paymentTerms:nf.paymentTerms,deliveryRules:nf.deliveryRules,branches:Number(nf.branches)||0,status:nf.status,assigned:nf.assigned};CHAINS.push(newCh);setChains2([].concat(CHAINS));setShowNew(false);setNf({name:"",hq:"",buyer:"",phone:"",supplierNo:"",paymentTerms:"Net 30",deliveryRules:"",branches:"",status:"prospect",assigned:user.name});}
 const filtered=accs.filter(c=>c.name.toLowerCase().includes(search.toLowerCase())||c.buyer.toLowerCase().includes(search.toLowerCase()));
-return(<div><div className="fb"><input className="tb-s" placeholder={t.search} value={search} onChange={e=>setSearch(e.target.value)} style={{width:260}}/>{user.role==="admin"&&<button className="btn btn-p" onClick={function(){setShowNew(true)}}>{t.newAccount}</button>}<button className="btn btn-s btn-g" onClick={function(){var data=accs.map(function(c){var co=ORDERS_DB.filter(function(o){return o.chain===c.name});return{ID:c.id,Cadena:c.name,HQ:c.hq,Comprador:c.buyer,Telefono:c.phone,Pago:c.paymentTerms,Sucursales:c.branches,Estado:c.status,Asignada:c.assigned,Pedidos:co.length,Ingresos:co.reduce(function(s,o){return s+o.total},0)}});exportToExcel(data,"SAHIBA_Cuentas_"+new Date().toISOString().slice(0,10),"Cuentas")}} style={{marginLeft:"auto"}}>Excel</button></div>
+return(<div><div className="fb"><input className="tb-s" placeholder={t.search} value={search} onChange={e=>setSearch(e.target.value)} style={{width:260}}/>{user.role==="admin"&&<button className="btn btn-p" onClick={function(){setShowNew(true)}}>{t.newAccount}</button>}<button className="btn btn-s btn-g" onClick={function(){var data=accs.map(function(c){var co=ORDERS_DB.filter(function(o){return o.chain===c.name});return{ID:c.id,Cadena:c.name,HQ:c.hq,Comprador:c.buyer,Telefono:c.phone,Proveedor:c.supplierNo||"",Pago:c.paymentTerms,Sucursales:c.branches,Estado:c.status,Asignada:c.assigned,Pedidos:co.length,Ingresos:co.reduce(function(s,o){return s+o.total},0)}});exportToExcel(data,"SAHIBA_Cuentas_"+new Date().toISOString().slice(0,10),"Cuentas")}} style={{marginLeft:"auto"}}>Excel</button></div>
 <div className="acs">{filtered.map(c=>{const co=ORDERS_DB.filter(o=>o.chain===c.name);const rev=co.reduce((s,o)=>s+o.total,0);return(<div key={c.id} className="akd" onClick={()=>nav("account-detail",c)}>
 <div className="ah"><div><div className="acn">{c.name}</div><div className="aby">{c.buyer} - {c.hq}</div></div><span className={"bd "+(c.status==="active"?"bd-gn":"bd-yw")}>{c.status==="active"?t.active:t.prospect}</span></div>
 <div style={{fontSize:11,color:"var(--t4)"}}>{t.assigned}: <span style={{color:"var(--ac)"}}>{c.assigned}</span></div>
+{c.supplierNo&&<div style={{fontSize:11,color:"var(--t4)",marginTop:2}}>{t.supplierNo}: <span style={{color:"var(--ac)",fontWeight:600}}>{c.supplierNo}</span></div>}
 <div className="ast"><div><div className="asl">{t.orders}</div><div className="asv">{co.length}</div></div><div><div className="asl">{t.total}</div><div className="asv" style={{color:"var(--gn)",fontSize:12}}>{fmt(rev)}</div></div><div><div className="asl">{t.branches}</div><div className="asv">{c.branches}</div></div></div>
 </div>)})}</div>
 {showNew&&<div className="modal-ov" onClick={function(){setShowNew(false)}}><div className="modal" onClick={function(e){e.stopPropagation()}} style={{maxWidth:620}}>
@@ -981,6 +998,7 @@ return(<div><div className="fb"><input className="tb-s" placeholder={t.search} v
 <div className="fg"><label>Telefono</label><input className="fi" value={nf.phone} onChange={function(e){setNf(Object.assign({},nf,{phone:e.target.value}))}} placeholder="+52..." /></div>
 </div>
 <div className="fg-row">
+<div className="fg"><label>No. de Proveedor</label><input className="fi" value={nf.supplierNo} onChange={function(e){setNf(Object.assign({},nf,{supplierNo:e.target.value}))}} placeholder="Ej: 156403" /></div>
 <div className="fg"><label>Condiciones de Pago</label><select className="fi" value={nf.paymentTerms} onChange={function(e){setNf(Object.assign({},nf,{paymentTerms:e.target.value}))}}>
 <option value="Net 30">Net 30</option><option value="Net 45">Net 45</option><option value="Net 60">Net 60</option><option value="Net 90">Net 90</option><option value="Contado">Contado</option>
 </select></div>
@@ -1027,6 +1045,7 @@ function StockPopup({product, products}) {
 // ====== QUOTE PDF PREVIEW ======
 function QuotePdfPreview({quote, onClose}) {
   var rules = CHAIN_RULES[quote.chain] || {};
+  var chainRec = CHAINS.find(function(c){return c.name===quote.chain}) || {};
   var today = new Date().toLocaleDateString("es-MX", {day:"numeric",month:"long",year:"numeric"});
   return (<div className="modal-ov" onClick={onClose}><div className="modal" onClick={function(e){e.stopPropagation()}} style={{maxWidth:700,maxHeight:"90vh"}}>
     <div style={{display:"flex",justifyContent:"space-between",marginBottom:12}}>
@@ -1048,6 +1067,7 @@ function QuotePdfPreview({quote, onClose}) {
         <div><strong>Cadena:</strong> {quote.chain}</div>
         <div><strong>Comprador:</strong> {quote.buyer}</div>
         <div><strong>Condiciones:</strong> {rules.payTerms || "Acordar"}</div>
+        {chainRec.supplierNo && <div><strong>No. Proveedor:</strong> {chainRec.supplierNo}</div>}
       </div>
       {rules.notes && <div className="pdf-chain-box"><strong>Requisitos {quote.chain}:</strong> {rules.notes}</div>}
       <h2>Productos</h2>
@@ -1523,18 +1543,40 @@ return(<div><div className="mg"><div className="mk"><div className="mk-l">{t.inv
 </tbody></table></div></div>);
 }
 
-function DocsMedia({user,lang}){const t=T[lang];const docs2=user.role==="admin"?DOCS_MEDIA:DOCS_MEDIA.filter(d=>d.uploadedBy===user.name);const typeMap={meeting_notes:t.meetingNotes,signed_order:t.signedOrders,store_photos:t.storePhotos,req_files:t.reqFiles,delivery_proof:t.deliveryProof};
+function DocsMedia({user,lang}){const t=T[lang];
+const typeMap={meeting_notes:t.meetingNotes,signed_order:t.signedOrders,store_photos:t.storePhotos,req_files:t.reqFiles,delivery_proof:t.deliveryProof,catalog:t.catalogs};
 const[showUp,setShowUp]=useState(false);
-return(<div><div className="fb"><button className="btn btn-p" onClick={()=>setShowUp(true)}>{t.uploadFile}</button></div>
-<div className="tw"><table className="dt"><thead><tr><th>ID</th><th>{t.type}</th><th>{t.chain}</th><th>{t.name}</th><th>{t.user}</th><th>{t.date}</th></tr></thead><tbody>
-{docs2.map(d=><tr key={d.id}><td style={{fontWeight:600}}>{d.id}</td><td><span className="bd bd-bl">{typeMap[d.type]||d.type}</span></td><td>{d.chain}</td><td style={{color:"var(--ac)"}}>{d.fileName}</td><td>{d.uploadedBy}</td><td>{fmtD(d.date)}</td></tr>)}
+const[localDocs,setLocalDocs]=useState([]);
+const[upType,setUpType]=useState("catalog");
+const[upChain,setUpChain]=useState("Comercial Mexicana");
+const[upFile,setUpFile]=useState(null);
+const[saving,setSaving]=useState(false);
+useEffect(function(){idbAllDocs(function(list){setLocalDocs(list.reverse())});},[]);
+function refreshDocs(){idbAllDocs(function(list){setLocalDocs(list.reverse())});}
+function fmtSize(n){if(!n)return "-";if(n>1048576)return (n/1048576).toFixed(1)+" MB";return Math.round(n/1024)+" KB";}
+function saveUpload(){
+if(!upFile){alert(t.selectFileFirst);return;}
+if(upFile.size>15728640){alert(t.fileTooBig);return;}
+setSaving(true);
+var doc={id:"UP-"+Date.now(),type:upType,chain:upChain,fileName:upFile.name,bytes:upFile.size,mime:upFile.type,blob:upFile,uploadedBy:user.name,date:new Date().toISOString().slice(0,10)};
+idbSaveDoc(doc,function(ok){setSaving(false);if(ok){refreshDocs();setShowUp(false);setUpFile(null);}else{alert("Error: could not save file");}});
+}
+function viewDoc(d){var url=URL.createObjectURL(d.blob);window.open(url,"_blank");setTimeout(function(){URL.revokeObjectURL(url)},120000);}
+function delDoc(d){if(!confirmDelete(d.fileName))return;idbDeleteDoc(d.id,function(){refreshDocs()});}
+var visLocal=user.role==="admin"?localDocs:localDocs.filter(function(d){return d.uploadedBy===user.name});
+var visMock=user.role==="admin"?DOCS_MEDIA:DOCS_MEDIA.filter(function(d){return d.uploadedBy===user.name});
+return(<div><div className="fb"><button className="btn btn-p" onClick={function(){setShowUp(true)}}>{t.uploadFile}</button></div>
+<div className="tw"><table className="dt"><thead><tr><th>ID</th><th>{t.type}</th><th>{t.chain}</th><th>{t.name}</th><th>{t.user}</th><th>{t.date}</th><th>Size</th><th></th></tr></thead><tbody>
+{visLocal.map(function(d){return <tr key={d.id}><td style={{fontWeight:600}}>{d.id}</td><td><span className={"bd "+(d.type==="catalog"?"bd-gn":"bd-bl")}>{typeMap[d.type]||d.type}</span></td><td>{d.chain}</td><td style={{color:"var(--ac)",cursor:"pointer"}} onClick={function(){viewDoc(d)}}>{d.fileName}</td><td>{d.uploadedBy}</td><td>{fmtD(d.date)}</td><td>{fmtSize(d.bytes)}</td><td style={{whiteSpace:"nowrap"}}><button className="btn btn-s" onClick={function(){viewDoc(d)}}>{t.view}</button> <button className="btn btn-s" style={{color:"var(--rd)"}} onClick={function(){delDoc(d)}}>X</button></td></tr>})}
+{visMock.map(function(d){return <tr key={d.id}><td style={{fontWeight:600}}>{d.id}</td><td><span className="bd bd-bl">{typeMap[d.type]||d.type}</span></td><td>{d.chain}</td><td style={{color:"var(--ac)"}}>{d.fileName}</td><td>{d.uploadedBy}</td><td>{fmtD(d.date)}</td><td>{d.size}</td><td></td></tr>})}
 </tbody></table></div>
-{showUp&&<div className="modal-ov" onClick={()=>setShowUp(false)}><div className="modal" onClick={e=>e.stopPropagation()}>
+{showUp&&<div className="modal-ov" onClick={function(){setShowUp(false)}}><div className="modal" onClick={function(e){e.stopPropagation()}}>
 <h2>{t.uploadFile}</h2>
-<div className="fg"><label>{t.uploadType}</label><select className="fi"><option>{t.meetingNotes}</option><option>{t.reqFiles}</option><option>{t.signedOrders}</option><option>{t.deliveryProof}</option><option>{t.storePhotos}</option></select></div>
-<div className="fg"><label>{t.chain}</label><select className="fi">{CHAINS.map(c=><option key={c.id}>{c.name}</option>)}</select></div>
-<div className="fg"><label>File</label><input className="fi" type="file"/></div>
-<div style={{display:"flex",gap:8,marginTop:16}}><button className="btn btn-p" onClick={()=>setShowUp(false)}>{t.save}</button><button className="btn btn-g" onClick={()=>setShowUp(false)}>{t.cancel}</button></div>
+<div className="fg"><label>{t.uploadType}</label><select className="fi" value={upType} onChange={function(e){setUpType(e.target.value)}}><option value="catalog">{t.catalogs}</option><option value="meeting_notes">{t.meetingNotes}</option><option value="req_files">{t.reqFiles}</option><option value="signed_order">{t.signedOrders}</option><option value="delivery_proof">{t.deliveryProof}</option><option value="store_photos">{t.storePhotos}</option></select></div>
+<div className="fg"><label>{t.chain}</label><select className="fi" value={upChain} onChange={function(e){setUpChain(e.target.value)}}>{CHAINS.map(function(c){return <option key={c.id} value={c.name}>{c.name}</option>})}</select></div>
+<div className="fg"><label>File (max 15 MB)</label><input className="fi" type="file" onChange={function(e){setUpFile(e.target.files&&e.target.files[0]?e.target.files[0]:null)}} /></div>
+{upFile&&<div style={{fontSize:11,color:"var(--t3)",marginBottom:8}}>{upFile.name} ({fmtSize(upFile.size)})</div>}
+<div style={{display:"flex",gap:8,marginTop:16}}><button className="btn btn-p" disabled={saving} onClick={saveUpload}>{saving?"Saving...":t.save}</button><button className="btn btn-g" onClick={function(){setShowUp(false)}}>{t.cancel}</button></div>
 </div></div>}</div>);
 }
 
@@ -1615,7 +1657,7 @@ const navSections=isWh?[
 const pageTitle={dashboard:isAdmin?t.dashboard:isWh?t.dashboard:t.myDashboard,accounts:t.accounts,catalog:t.catalog,pipeline:t.pipeline,orders:t.orders,quotes:t.quotes,tech_docs:t.techDocs,samples:t.samples,inventory:t.inventory,delivery:t.delivery,invoices:t.invoices,docs_media:t.docs,notifs:t.notifs,reports:t.reports,settings:t.settings};
 
 return(<div className="al">
-{sbOpen&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.5)",zIndex:99}} onClick={()=>setSbOpen(false)}/>}
+{sbOpen&&<div style={{position:"fixed",inset:0,background:"rgba(16,25,43,.4)",zIndex:99}} onClick={()=>setSbOpen(false)}/>}
 <aside className={"sb"+(sbOpen?" open":"")}>
 <div className="sb-h"><h1>SAHIBA</h1><p>Chain Store CRM</p></div>
 <nav className="sb-n">{navSections.map(sec=><div key={sec.section} className="ns"><div className="nl">{sec.section}</div>
